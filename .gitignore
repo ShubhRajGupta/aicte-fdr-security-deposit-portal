@@ -1,0 +1,41 @@
+# GSD Session State — volatile session files excluded from git
+.gsd/STATE.md
+.gsd/JOURNAL.md
+.gsd/TODO.md
+.gsd/phases/*/*-TEMP-*.md
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+
+# Build outputs (will exist when implementation begins)
+target/
+build/
+dist/
+node_modules/
+.gradle/
+
+# Secrets (should never be committed)
+*.env
+.env.*
+secrets/
+**/application-prod.yml
+**/application-production.yml
+
+# Test artifacts
+*.log
+coverage/
+playwright-report/
+test-results/
+
+# Temporary
+*.tmp
+*.bak
+*.swp
