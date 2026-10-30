@@ -1,0 +1,87 @@
+# AICTE Approval Process Handbook (APH 2024-27) Rule Set
+# Statutory Authority: All India Council for Technical Education, Ministry of Education, GoI
+# PSID: 26265
+
+version: "2024-27"
+promulgated_date: "2024-04-01"
+effective_until: "2027-03-31"
+
+clauses:
+  clause_1_4:
+    title: "Security Deposit Requirements for Technical Institutions"
+    description: "Deposit to be maintained in joint name of AICTE Regional Officer and Institution Chairman/Trustee in a Scheduled Commercial Bank."
+    categories:
+      engineering_technology:
+        new_institution_ug:
+          amount_inr: 3500000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+        new_institution_pg:
+          amount_inr: 2500000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+        new_division:
+          amount_inr: 500000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+      management_mba_mca:
+        new_institution:
+          amount_inr: 1500000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+      pharmacy_diploma_degree:
+        new_institution:
+          amount_inr: 1500000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+      polytechnic_diploma:
+        new_institution:
+          amount_inr: 1000000.00
+          tenure_years: 10
+          joint_lien_mandatory: true
+    discounts_concessions:
+      women_only_institutions:
+        discount_percentage: 20
+      ner_jk_ladakh:
+        discount_percentage: 20
+      sc_st_pwd_trustees:
+        discount_percentage: 20
+
+  clause_1_5:
+    title: "Interest, Roll-Over and Encashment Protocols"
+    interest_distribution:
+      quarterly_crediting_to_institution: true
+      permitted_if_no_show_cause_pending: true
+    timeline_alerts:
+      first_warning_days: 90
+      second_warning_days: 60
+      final_escalation_days: 30
+      defaulter_notice_days: 15
+    auto_renewal_grace_period_days: 30
+
+discrepancy_rules:
+  R1:
+    code: "RULE_AMT_INSUFFICIENT"
+    name: "Deposit Amount Below Statutory APH Mandate"
+    severity: "CRITICAL"
+    action: "BLOCK_APPROVAL"
+  R2:
+    code: "RULE_INVALID_TENOR"
+    name: "Maturity Period Under 10/8 Years"
+    severity: "HIGH"
+    action: "RAISE_DEFECT_QUERY"
+  R3:
+    code: "RULE_NON_SCHEDULED_BANK"
+    name: "Deposit Held in Non-Scheduled / Cooperative Bank"
+    severity: "HIGH"
+    action: "REJECT_BANK"
+  R4:
+    code: "RULE_MISSING_JOINT_LIEN"
+    name: "AICTE Lien Endorsement Absent on FDR Receipt"
+    severity: "CRITICAL"
+    action: "BLOCK_NOC"
+  R5:
+    code: "RULE_NAME_MISMATCH"
+    name: "Institution Name on Receipt Differs from Approval Letter"
+    severity: "MEDIUM"
+    action: "SCRUTINY_REVIEW"

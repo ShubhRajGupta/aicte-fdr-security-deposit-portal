@@ -1,0 +1,45 @@
+{
+  "realm": "aicte-fdr",
+  "displayName": "AICTE FDR Security Deposit Sovereign Realm",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "rememberMe": false,
+  "ssoSessionIdleTimeout": 900,
+  "ssoSessionMaxLifespan": 28800,
+  "accessTokenLifespan": 300,
+  "roles": {
+    "realm": [
+      { "name": "INSTITUTION_USER", "description": "Institute data entry and draft creator" },
+      { "name": "INSTITUTION_SIGNATORY", "description": "Chairman/Principal authorized signatory" },
+      { "name": "REGIONAL_VERIFIER", "description": "AICTE Regional Office scrutiny officer" },
+      { "name": "BUREAU_OFFICER", "description": "AICTE Regulation Bureau Headquarters officer" },
+      { "name": "COMPETENT_AUTHORITY", "description": "Adviser-I / Member Secretary release approval" },
+      { "name": "BANK_OFFICER", "description": "Scheduled commercial bank branch manager" },
+      { "name": "ACCOUNTS_OFFICER", "description": "AICTE Finance & Accounts officer" },
+      { "name": "RULE_OWNER", "description": "APH policy administrator" },
+      { "name": "AUDITOR", "description": "CAG / CERT-In independent sovereign auditor" },
+      { "name": "SYSTEM_ADMIN", "description": "Infrastructure operations lead" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "fdr-portal-bff",
+      "name": "AICTE FDR Backend-For-Frontend Client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "sovereign-vault-secret-do-not-log",
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "redirectUris": [
+        "https://fdr.aicte-india.org/api/auth/callback",
+        "https://fdr-staging.aicte-india.org/api/auth/callback"
+      ]
+    }
+  ]
+}

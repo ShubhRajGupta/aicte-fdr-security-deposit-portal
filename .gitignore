@@ -9,20 +9,20 @@
 Thumbs.db
 desktop.ini
 
-# IDE
+# IDE & Editors
 .idea/
 .vscode/
 *.iml
 *.iws
 
-# Build outputs (will exist when implementation begins)
+# Build outputs
 target/
 build/
 dist/
 node_modules/
 .gradle/
 
-# Secrets (should never be committed)
+# Secrets
 *.env
 .env.*
 secrets/
@@ -35,8 +35,26 @@ coverage/
 playwright-report/
 test-results/
 
-# Temporary
+# Temporary & Lock files
 *.tmp
 *.bak
 *.swp
 ~$*
+*.crdownload
+
+# LaTeX intermediate build outputs
+*.aux
+*.lof
+*.lot
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Unwanted presentations, scratch files & artifacts
+Phra Uma Thewi.pptx
+AAAAAAAAAAAAAAPPT/
+qa_report.json
+template_integrity.json
+template_map.json

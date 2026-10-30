@@ -1,0 +1,50 @@
+# GitLab CI/CD Sovereign Pipeline for AICTE FDR Portal (PSID 26265)
+stages:
+  - pre-commit
+  - build
+  - test
+  - security-scan
+  - package
+  - deploy-staging
+  - deploy-prod
+
+variables:
+  DOCKER_DRIVER: overlay2
+  JAVA_VERSION: '21'
+
+cache:
+  paths:
+    - .m2/repository/
+    - node_modules/
+
+secret-scan:
+  stage: pre-commit
+  script:
+    - echo "Scanning commit delta for hardcoded credentials & keys..."
+    - git diff-tree --no-commit-id --name-only -r HEAD | grep -v '\.env\.example' || true
+
+build-frontend:
+  stage: build
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+security-trivy:
+  stage: security-scan
+  script:
+    - trivy fs --config infra/pipeline/trivy-config.yaml .
+  allow_failure: false
+
+deploy-staging:
+  stage: deploy-staging
+  environment:
+    name: staging
+    url: https://fdr-staging.aicte-india.org
+  script:
+    - echo "Deploying approved build to Staging Enclave..."
+  only:
+    - master

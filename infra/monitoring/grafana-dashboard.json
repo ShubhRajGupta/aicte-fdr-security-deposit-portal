@@ -1,0 +1,56 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "title": "Total FDR Portfolio Value Under Management",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "sum(aicte_fdr_total_deposit_value_inr)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "title": "Cryptographic Audit Ledger Integrity Status",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "aicte_audit_chain_verified_gauge",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "id": 3,
+      "title": "Maturity & Renewal Notification Rate (30/60/90 Days)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(aicte_fdr_notifications_dispatched_total[5m])",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["aicte", "fdr", "sih2026"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "AICTE FDR Security Deposit Portal Telemetry",
+  "version": 1
+}

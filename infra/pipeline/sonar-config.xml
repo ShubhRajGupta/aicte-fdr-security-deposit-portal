@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sonar-quality-gate>
+  <name>AICTE-Sovereign-Gate</name>
+  <conditions>
+    <condition>
+      <metric>new_reliability_rating</metric>
+      <op>GREATER_THAN</op>
+      <error>1</error>
+    </condition>
+    <condition>
+      <metric>new_security_rating</metric>
+      <op>GREATER_THAN</op>
+      <error>1</error>
+    </condition>
+    <condition>
+      <metric>new_security_hotspots_reviewed</metric>
+      <op>LESS_THAN</op>
+      <error>100</error>
+    </condition>
+    <condition>
+      <metric>new_coverage</metric>
+      <op>LESS_THAN</op>
+      <error>80</error>
+    </condition>
+    <condition>
+      <metric>new_duplicated_lines_density</metric>
+      <op>GREATER_THAN</op>
+      <error>3</error>
+    </condition>
+  </conditions>
+</sonar-quality-gate>
