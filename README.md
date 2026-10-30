@@ -7,12 +7,14 @@
 
 [![Deploy to GitHub Pages](https://github.com/ShubhRajGupta/aicte-fdr-security-deposit-portal/actions/workflows/deploy.yml/badge.svg)](https://github.com/ShubhRajGupta/aicte-fdr-security-deposit-portal/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f?style=flat&logo=github)](https://shubhrajgupta.github.io/aicte-fdr-security-deposit-portal/)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShubhRajGupta%2Faicte-fdr-security-deposit-portal)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
-## 🌐 Live Deployment
-**URL**: [https://shubhrajgupta.github.io/aicte-fdr-security-deposit-portal/](https://shubhrajgupta.github.io/aicte-fdr-security-deposit-portal/)
+## 🌐 Live Deployments
+- **GitHub Pages**: [https://shubhrajgupta.github.io/aicte-fdr-security-deposit-portal/](https://shubhrajgupta.github.io/aicte-fdr-security-deposit-portal/)
+- **Vercel 1-Click Import**: [Deploy to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShubhRajGupta%2Faicte-fdr-security-deposit-portal)
 
 ---
 
@@ -93,3 +95,4 @@ Complies with AICTE Approval Process Handbook (APH 2024-27):
 ---
 
 Designed and engineered for **Smart India Hackathon (SIH)**.
+
