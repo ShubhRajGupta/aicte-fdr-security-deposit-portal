@@ -1,0 +1,6 @@
+flowchart LR
+  A[01 Input / real user request] --> B[02 Validation and preprocessing]
+  B --> C[03 Core method / decision engine]
+  C --> D[04 Action / output for user or operator]
+  D --> E[05 Feedback, logging and evaluation]
+  E -. failure or drift .-> B

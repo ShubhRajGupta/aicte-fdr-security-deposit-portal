@@ -1,0 +1,13 @@
+digraph SIHArchitecture {
+  rankdir=LR;
+  graph [fontname="Arial", bgcolor="transparent", nodesep=0.35, ranksep=0.55];
+  node [shape=box, style="rounded,filled", fillcolor="#F4F7FB", color="#2E5B88", fontname="Arial", fontsize=11, margin="0.12,0.08"];
+  edge [color="#4F6478", fontname="Arial", fontsize=9, arrowsize=0.7];
+  input [label="01 Input / source"];
+  ingest [label="02 Validate / ingest"];
+  core [label="03 Core processing"];
+  output [label="04 User / operator output"];
+  monitor [label="05 Feedback / audit"];
+  input -> ingest -> core -> output -> monitor;
+  monitor -> ingest [label="retry / correction", style=dashed];
+}

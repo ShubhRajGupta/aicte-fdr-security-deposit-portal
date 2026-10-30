@@ -1,116 +1,315 @@
-# PROJECT RULES — AICTE FDR Portal (PSID 26265)
+# PROJECT_RULES.md — GSD Canonical Rules
 
-> These rules are invariants. They apply to every plan, every commit, every release.
-> If a situation seems to require an exception, that is a signal to raise it with the tech lead, not to proceed anyway.
-
----
-
-## Planning Rules
-
-1. **No implementation without an approved plan.** Every feature has a PLAN.md first.
-2. **Plans are prompts.** PLAN.md is not documentation — it is the instruction set for execution.
-3. **2–3 tasks per plan maximum.** Larger scope → split into multiple plans.
-4. **No plan modifies more than 5 files per task.** More files = split the task.
-5. **Same-wave plans must not touch the same files.** Resolve at planning time.
-6. **Spikes close before their dependent phases begin.** No assumptions about spike results.
-7. **Rules are data, never code.** Any APH threshold, deadline, or amount lives in the rule_set table, versioned by APH edition. Raise a blocker if tempted to hard-code.
+> **Single Source of Truth** for the Get Shit Done methodology.
+> 
+> Model-agnostic. All adapters and extensions reference this file.
 
 ---
 
-## Branching & Commit Rules
+## Core Protocol
 
-1. Trunk-based development. Feature branches live under **2 days**.
-2. Pull requests ≤ **400 changed lines**. Split if larger.
-3. Authors never merge their own PRs.
-4. **CODEOWNERS enforced:** rules engine, timeline, authorisation, audit, and migrations require **2 reviewers**. Everything else requires 1.
-5. Commit message format: `type(module): short description` (e.g., `feat(timeline): add next-action-date computation`)
+**SPEC → PLAN → EXECUTE → VERIFY → COMMIT**
 
----
+1. **SPEC**: Define requirements in `.gsd/SPEC.md` until status is `FINALIZED`
+2. **PLAN**: Decompose into phases in `.gsd/ROADMAP.md`, then detailed plans
+3. **EXECUTE**: Implement with atomic commits per task
+4. **VERIFY**: Prove completion with empirical evidence
+5. **COMMIT**: One task = one commit, message format: `type(scope): description`
 
-## Definition of Done (per task/PR)
-
-A task is done when ALL of the following are true:
-- [ ] Code written and tests pass
-- [ ] Audit event written for every state change (in same DB transaction)
-- [ ] Accessibility check done (if UI change)
-- [ ] Feature flag added (new features default OFF)
-- [ ] Runbook note updated if operational behaviour changed
-- [ ] PR template fully filled
+**Planning Lock**: No implementation code until SPEC.md contains "Status: FINALIZED".
 
 ---
 
-## Database Rules
+## Proof Requirements
 
-1. **Expand-and-contract migrations only.** Add new structure, deploy code that writes both, backfill, switch reads, remove old structure a release later.
-2. Every migration tested on a **production-size copy** before release.
-3. Every migration has a **rollback script**.
-4. Flyway manages all migrations. No hand edits in production.
-5. **No UPDATE or DELETE on accepted instrument versions or audit.event.** DB triggers enforce this.
-6. Money: **NUMERIC(18,2)** only. Never float, never string.
-7. Calendar dates: **DATE type in Asia/Kolkata**. Event times: **TIMESTAMPTZ stored in UTC, displayed in IST**. Never convert a maturity date through UTC.
-8. **SET LOCAL for RLS context, inside the transaction only.** Never SET (session-level) in a pooled connection.
+Every change requires verification evidence:
 
----
+| Change Type | Required Proof |
+|-------------|----------------|
+| API endpoint | curl/HTTP response |
+| UI change | Screenshot |
+| Build/compile | Command output |
+| Test | Test runner output |
+| Config | Verification command |
 
-## Security Rules
+**Never accept**: "It looks correct", "This should work", "I've done similar before".
 
-1. **No secrets in source code or container images.** Injected from vault at deploy time.
-2. Secret scanning runs in pre-commit hook AND CI. Fails the build.
-3. No dependency release younger than **14 days** in production.
-4. No abandoned packages. Licence scan on every build.
-5. Container images: minimal base, non-root, read-only filesystem, signed.
-6. **No custom cryptography.** Use platform libraries and the KMS.
-7. TLS 1.2 minimum (1.3 preferred) everywhere.
-8. Admin console for Keycloak never exposed publicly.
-9. Documents served only through **short-lived signed links** (expiry in minutes), never directly.
-10. Every outbound call has: timeout, retry with jitter, circuit breaker, bulkhead (Resilience4j), and a degraded-mode fallback.
+**Always require**: Captured output, screenshot, or test result.
 
 ---
 
-## Infrastructure Rules
+## Search-First Discipline
 
-1. Everything as code (Terraform / Ansible). No hand edits in production.
-2. Drift check runs after every deploy.
-3. All environments (dev, test, staging, prod, DR) provisioned from the same IaC.
-4. Production access: named accounts, session recording, no shared logins, requires approval.
+**Before reading any file completely:**
 
----
+1. **Search first** — Use grep, ripgrep, or IDE search to find relevant snippets
+2. **Evaluate snippets** — Determine if full file read is justified
+3. **Targeted reads** — Only read specific line ranges when needed
 
-## Release Rules
+**Benefits:**
+- Reduces context pollution
+- Faster understanding of large codebases
+- Prevents reading irrelevant code
 
-1. **Seasonal freeze: 1 March – 31 July.** Only critical fixes; second approver required.
-2. Readiness review every February before the freeze.
-3. All pipeline stages green on the exact artefact being released.
-4. SBOM (CycloneDX) + VEX notes generated for every release.
-5. Release checklist signed by QA lead, security lead, and product owner.
-6. Feature flags set: new features OFF by default.
-7. Rollback plan written and rollback script tested before deploy.
-8. **Rule-set changes** must be simulated and approved by the rule owner before activation — even in hotfixes.
+**Anti-pattern**: Reading entire files "to understand the context" without searching first.
 
 ---
 
-## Correctness-Critical Zones
+## Delegation
 
-Any PR touching these zones requires an **ADR** if it changes a design boundary:
+**Rule:** Orchestrator workflows delegate the work and keep the routing.
 
-| Zone | Extra requirement |
-|------|-------------------|
-| Date & tenor maths | Property-based tests (jqwik); 100% branch coverage; mutation score ≥ 80% |
-| Rule evaluation | Simulation diffs reviewed before activation |
-| Authorisation + RLS | Negative tests for every role/endpoint; DB-level tests bypassing app code |
-| Money & ledger | Exact decimals; reconciliation tests |
-| Audit chain | Chain verification job; tamper test; external checkpoint |
-| Notification sending | Dry-run mode; rate cap; kill switch; recipient preview |
+Where `invoke_subagent` exists (Antigravity 2.0+), heavy work runs in a subagent with its own
+context. The orchestrator reads compact results only.
+
+| Work | Subagent |
+|------|----------|
+| Plan execution | `gsd-executor` (one per PLAN.md) |
+| Plan authoring | `gsd-planner` |
+| Phase verification | `gsd-verifier` |
+| Mapping and research | `gsd-researcher` |
+| Bug diagnosis | `gsd-debugger` |
+
+**Non-negotiable:**
+- A subagent inherits **no** conversation history — put every needed fact in its prompt
+- Pass **paths**, never file contents
+- Never re-read an artifact a subagent already summarized just to confirm it
+- Where subagents are unavailable, say so out loud and degrade to one plan per session —
+  never claim delegation that did not happen
+
+Full protocol: `.agents/skills/subagent-delegation/SKILL.md`
 
 ---
 
-## ADR Rule
+## Wave Execution
 
-Any change to:
-- module boundaries
-- third-party libraries
-- data model (beyond add-column)
-- authentication/authorisation flow
-- external integration
+Plans are grouped into **waves** based on dependencies:
 
-...requires a written ADR before the PR is merged.
+| Wave | Characteristic | Execution |
+|------|----------------|-----------|
+| 1 | Foundation tasks, no dependencies | Run in parallel |
+| 2 | Depends on Wave 1 | Wait for Wave 1, then parallel |
+| 3 | Depends on Wave 2 | Wait for Wave 2, then parallel |
+
+**Parallelism is real only with subagents.** A wave with multiple plans runs one
+`gsd-executor` per plan in `branch` workspace mode (isolated git worktrees), merged when the
+wave closes. Without subagents, a "wave" degrades to sequential execution in one context —
+plan it as such.
+
+**Wave Completion Protocol:**
+1. All tasks in wave verified
+2. State snapshot created
+3. Commit all wave work
+4. Update STATE.md with position
+
+---
+
+## State Snapshots
+
+At the end of each wave or significant work block, create a state snapshot:
+
+```markdown
+## Wave N Summary
+
+**Objective:** {what this wave aimed to accomplish}
+
+**Changes:**
+- {change 1}
+- {change 2}
+
+**Files Touched:**
+- {file1}
+- {file2}
+
+**Verification:**
+- {command}: {result}
+
+**Risks/Debt:**
+- {any concerns}
+
+**Next Wave TODO:**
+- {item 1}
+- {item 2}
+```
+
+---
+
+## Model Independence
+
+**Absolute Rule**: No rule, workflow, or skill may require a specific model provider.
+
+**Allowed:**
+- Optional adapters with provider-specific enhancements
+- Capability-based recommendations (e.g., "use a reasoning model for planning")
+- Examples mentioning specific models as illustrations
+
+**Forbidden:**
+- Hard dependencies on provider features
+- Breaking behavior when a specific model is unavailable
+- Duplicating canonical rules in adapters
+
+**Adapter Pattern:**
+```
+adapters/
+├── CLAUDE.md    # Optional Claude enhancements
+├── GEMINI.md    # Optional Gemini enhancements
+└── GPT_OSS.md   # Optional GPT/OSS enhancements
+```
+
+Each adapter must begin with:
+> "Everything in this file is optional. For canonical rules, see PROJECT_RULES.md."
+
+---
+
+## Commit Conventions
+
+**Format:**
+```
+type(scope): description
+```
+
+**Types:**
+| Type | Usage |
+|------|-------|
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `docs` | Documentation only |
+| `refactor` | Code restructure (no behavior change) |
+| `test` | Adding/updating tests |
+| `chore` | Maintenance, dependencies |
+
+**Rules:**
+- One task = one commit
+- Verify before commit
+- Scope = phase number for phase work (e.g., `feat(phase-1): ...`)
+- **Confirm the commit landed** with `git log -1 --oneline` before starting the next task
+- **Never `--allow-empty`** — a task with no tracked change is not complete, and git does not
+  track directories
+
+---
+
+## Shell Discipline
+
+**Rule:** one command per invocation. Never chain with `&&` or `||`.
+
+The host shell is not knowable from inside a workflow. Windows PowerShell 5.1 rejects both
+operators with a parse error, so `git add X && git commit -m "..."` does not partially run —
+it does not run at all, while looking like it did.
+
+| Do | Don't |
+|----|-------|
+| `git add -A` then `git commit -m "..."` as two calls | `git add -A && git commit -m "..."` |
+| Read each command's output before the next | Assume success from absence of a visible error |
+| Provide both PowerShell and Bash forms in workflows | Ship a bash-only example as "the" command |
+
+**Why it matters:** a command that never ran produces no error the agent recognises. Work is
+reported as done, the worktree is discarded, and the change is gone.
+
+---
+
+## Repository Structure
+
+```
+PROJECT_RULES.md          # ← This file (canonical rules)
+GSD-STYLE.md              # Style and conventions
+
+.agent/
+└── workflows/            # Slash commands (/plan, /execute, etc.)
+
+.agents/
+├── agents/               # Subagent definitions (invoked via invoke_subagent)
+└── skills/               # Agent specializations (Agent Skills standard)
+
+.gemini/                  # Gemini-specific configuration
+.gsd/                     # Project state and artifacts
+├── SPEC.md               # Requirements (must be FINALIZED)
+├── ROADMAP.md            # Phases and progress
+├── STATE.md              # Session memory
+├── templates/            # Document templates
+└── examples/             # Usage examples
+
+adapters/                 # Optional model-specific enhancements
+docs/                     # Operational documentation
+scripts/                  # Utility scripts
+```
+
+---
+
+## Context Management
+
+**Context Quality Thresholds:**
+
+| Usage | Quality |
+|-------|---------|
+| 0-30% | **PEAK** — Comprehensive, thorough work |
+| 30-50% | **GOOD** — Solid, confident output |
+| 50-70% | **DEGRADING** — Efficiency mode |
+| 70%+ | **POOR** — Rushed, incomplete |
+
+**Context Hygiene Rules:**
+- Keep plans under 50% context usage
+- Fresh context for each plan execution — enforced by one `gsd-executor` subagent per plan,
+  not by hoping the orchestrator stays tidy
+- After 3 debugging failures → state dump → fresh session
+- STATE.md = memory across sessions
+
+---
+
+## Token Efficiency Rules
+
+**Goal:** Minimize token consumption while maintaining output quality.
+
+### Loading Rules
+
+| Action | Rule |
+|--------|------|
+| Before reading file | Search first (grep, ripgrep) |
+| File >200 lines | Use outline, not full file |
+| File already understood | Reference summary, don't reload |
+| >5 files needed | Stop, reconsider approach |
+
+### Budget Thresholds
+
+| Usage | Action Required |
+|-------|-----------------|
+| 0-50% | Proceed normally |
+| 50-70% | Switch to outline mode, compress context |
+| 70%+ | State dump required, recommend fresh session |
+
+### Compression Protocol
+
+After understanding a file:
+1. Create summary in STATE.md or task notes
+2. Reference summary instead of re-reading
+3. Only reload specific sections if needed
+
+### Per-Wave Efficiency
+
+- Start each wave with minimal context
+- Load files just-in-time (when task requires)
+- Compress/summarize before moving to next wave
+- Document token usage in state snapshots (optional)
+
+**Anti-patterns:**
+- Loading files "just in case"
+- Re-reading files already understood
+- Full file reads when snippets suffice
+- Ignoring budget warnings
+
+---
+
+## Quick Reference
+
+```
+Before coding    → SPEC.md must be FINALIZED
+Before file read → Search first, then targeted read
+After each task  → Commit + update STATE.md
+After each wave  → State snapshot
+After 3 failures → State dump + fresh session
+Before "Done"    → Empirical proof captured
+```
+
+---
+
+*GSD Methodology — Model-Agnostic Edition*
+*Reference implementation for multi-LLM environments*

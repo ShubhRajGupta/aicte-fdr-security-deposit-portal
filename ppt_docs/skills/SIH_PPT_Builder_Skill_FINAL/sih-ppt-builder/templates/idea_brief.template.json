@@ -1,0 +1,91 @@
+{
+  "edition": "SIH 2026",
+  "track": "software_or_hardware",
+  "team": {
+    "registered_name": "Phra Uma Thewi",
+    "team_id": "",
+    "institution": "",
+    "members": []
+  },
+  "problem_statement": {
+    "id": "",
+    "exact_title": "",
+    "organization": "",
+    "theme": "",
+    "category": "",
+    "official_source_url": "",
+    "submission_constraints": []
+  },
+  "project_naming": {
+    "candidates": [],
+    "selected_hindi_word": "",
+    "meaning": "",
+    "full_technical_expansion": "",
+    "acronym_letter_mapping": [],
+    "collision_check_urls": []
+  },
+  "ground_reality": {
+    "actual_users_and_operators": [],
+    "current_workflow_evidence": [],
+    "field_research_conducted": false,
+    "field_research_notes": "",
+    "consent_and_anonymization": "",
+    "data_sources": [],
+    "operational_constraints": [],
+    "validation_gaps": []
+  },
+  "solution": {
+    "one_line_fragment": "",
+    "target_users": [],
+    "workflow_steps": [],
+    "differentiators": [],
+    "prototype_status": "CONCEPT",
+    "demonstrated_features": [],
+    "planned_features": [],
+    "architecture_components": [],
+    "technology_choices_and_rationale": [],
+    "data_and_api_dependencies": [],
+    "security_privacy_accessibility_controls": [],
+    "risks_and_mitigations": [],
+    "maturity_gates": [],
+    "implementation_phases": [],
+    "impact_metrics": [],
+    "assumptions": []
+  },
+  "submission": {
+    "official_template_path": "",
+    "official_guidelines_url": "",
+    "institution_rules_path": "",
+    "deadline": "",
+    "accepted_formats": [],
+    "max_file_size_mb": null,
+    "demo_video_required": null,
+    "filename_rule": ""
+  },
+  "style": {
+    "font_family": "Arial",
+    "h1_pt_target": "30-36",
+    "h2_pt_target": "18-22",
+    "body_pt_target": "14-17",
+    "diagram_label_pt_target": "11-14",
+    "citation_pt_target": "8-10",
+    "no_emojis": true,
+    "short_fragments_only": true,
+    "number_key_steps": true,
+    "partition_each_slide": true,
+    "preserve_template_geometry": true,
+    "source_markers_each_slide": true,
+    "focus_on_approach_not_problem_restatement": true,
+    "use_ground_reality_only_if_sourced": true
+  },
+  "slide_sources": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": []
+  },
+  "references": [],
+  "open_questions": []
+}

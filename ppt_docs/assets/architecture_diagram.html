@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      width: 1400px;
+      height: 750px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 12px;
+    }
+    .title-box h1 {
+      font-size: 20px;
+      color: #38bdf8;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .title-box p {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .badges {
+      display: flex;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-gov { background: #1e3a8a; color: #93c5fd; border: 1px solid #3b82f6; }
+    .badge-sec { background: #065f46; color: #a7f3d0; border: 1px solid #10b981; }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 220px 1fr 240px;
+      gap: 16px;
+      flex: 1;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    .card-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #cbd5e1;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 12px;
+      background: #f59e0b;
+      border-radius: 2px;
+    }
+    .actor-node {
+      background: #0f172a;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 11px;
+      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .actor-node strong { color: #f1f5f9; }
+    .actor-node span { font-size: 9.5px; color: #94a3b8; }
+
+    .core-panel {
+      background: #1e293b;
+      border: 1.5px solid #3b82f6;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .core-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 6px;
+    }
+    .core-header h2 { font-size: 13px; color: #60a5fa; font-weight: 700; }
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .module-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 10px;
+    }
+    .module-box h3 {
+      font-size: 11.5px;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .module-box p {
+      font-size: 10px;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+    .module-box ul {
+      margin-left: 14px;
+      margin-top: 4px;
+      font-size: 9.5px;
+      color: #cbd5e1;
+    }
+
+    .data-layer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .data-box {
+      background: #111827;
+      border: 1px dashed #475569;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+    .data-box strong { color: #34d399; display: block; margin-bottom: 2px; }
+
+    .trust-ladder {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      background: #0f172a;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+    }
+    .trust-step {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 600;
+    }
+    .step-l0 { background: #334155; color: #94a3b8; }
+    .step-l1 { background: #854d0e; color: #fde047; }
+    .step-l2 { background: #065f46; color: #6ee7b7; border: 1px solid #10b981; }
+    .step-lx { background: #7f1d1d; color: #fca5a5; }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: #64748b;
+      padding-top: 8px;
+      border-top: 1px solid #334155;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title-box">
+      <h1>NYAAS: END-TO-END SOVEREIGN TECHNICAL ARCHITECTURE</h1>
+      <p>Single Source of Truth for Technical Institution Fixed Deposit Receipts & Security Deposits (PSID 26265)</p>
+    </div>
+    <div class="badges">
+      <span class="badge badge-gov">GIGW 3.0 & MeitY India Cloud</span>
+      <span class="badge badge-sec">Zero Trust • L2 Gate Enforced</span>
+    </div>
+  </div>
+
+  <div class="grid-container">
+    <!-- Left Column: Access Channels -->
+    <div class="column">
+      <div class="card" style="height: 100%;">
+        <div class="card-title">1. Access & Actors</div>
+        <div class="actor-node">
+          <strong>🏛️ Technical Institutions</strong>
+          <span>Uploads FDR scan, affidavit & metadata; views query ledger & renewal status.</span>
+        </div>
+        <div class="actor-node">
+          <strong>🔍 Regional Offices / Bureau</strong>
+          <span>Role-based scrutiny queue, maker-checker document verification, hold/NOC review.</span>
+        </div>
+        <div class="actor-node">
+          <strong>🏦 Issuing Bank Branches</strong>
+          <span>Secure tokenized branch verification portal; confirms lien & deposit balance.</span>
+        </div>
+        <div class="actor-node">
+          <strong>📱 Public & Regulators</strong>
+          <span>Scans dynamic QR on digital NOC to verify cryptographic authenticity in real time.</span>
+        </div>
+        <div class="actor-node" style="margin-bottom:0; background:#1e1b4b; border-color:#6366f1;">
+          <strong style="color:#a5b4fc;">🛡️ Perimeter Security</strong>
+          <span>ModSecurity WAF, TLS 1.3, Keycloak OAuth2/OIDC, NIST SP 800-63B Session Timer.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Column: Core Modular Monolith -->
+    <div class="column" style="flex: 1;">
+      <div class="core-panel" style="height: 100%;">
+        <div class="core-header">
+          <h2>2. Core Processing Engine (Spring Boot / Modular Monolith)</h2>
+          <span style="font-size:10px; color:#cbd5e1;">Stateless Application Nodes • India Hosted</span>
+        </div>
+
+        <!-- Trust Ladder Visualization -->
+        <div>
+          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px; font-weight:600;">CORE STATUTORY GATEWAY: FOUR-TIER TRUST LEVEL STATE MACHINE</div>
+          <div class="trust-ladder">
+            <div class="trust-step step-l0">L0: SUBMITTED<br><span style="font-size:8px; font-weight:normal;">Self-Declared Scan</span></div>
+            <div style="align-self:center; color:#64748b;">➔</div>
+            <div class="trust-step step-l1">L1: DOC-CHECKED<br><span style="font-size:8px; font-weight:normal;">Officer Scrutinized</span></div>
+            <div style="align-self:center; color:#64748b;">➔</div>
+            <div class="trust-step step-l2">L2: BANK-CONFIRMED<br><span style="font-size:8px; font-weight:normal;">Direct Bank Evidence</span></div>
+            <div style="align-self:center; color:#64748b;">|</div>
+            <div class="trust-step step-lx">L-X: DISPUTED<br><span style="font-size:8px; font-weight:normal;">Rules R1-R10 Flag</span></div>
+          </div>
+        </div>
+
+        <div class="module-grid">
+          <div class="module-box">
+            <h3>Verification Engine</h3>
+            <p>10 deterministic discrepancy rules (R1-R10) run on every upload & edit.</p>
+            <ul>
+              <li>APH Amount shortfall check</li>
+              <li>Joint-lien clause validation</li>
+              <li>IFSC vs Branch bank cross-check</li>
+            </ul>
+          </div>
+          <div class="module-box">
+            <h3>Document Vault</h3>
+            <p>Pre-storage antivirus scan & envelope encryption.</p>
+            <ul>
+              <li>ClamAV async stream scan</li>
+              <li>SHA-256 integrity hash</li>
+              <li>AES-256 at rest (HSM / KMS)</li>
+            </ul>
+          </div>
+          <div class="module-box">
+            <h3>Instrument Registry</h3>
+            <p>Institution-wise single source of truth with immutable versions.</p>
+            <ul>
+              <li>Zero overwrites on renewal</li>
+              <li>Parent-child lineage tracking</li>
+              <li>Principal vs. interest separation</li>
+            </ul>
+          </div>
+          <div class="module-box">
+            <h3>Timeline Engine</h3>
+            <p>Automated calendar computation & multi-stage escalation.</p>
+            <ul>
+              <li>Clustered Quartz scheduler</li>
+              <li>T-90, T-60, T-30, T-7 alerts</li>
+              <li>Daily officer digests (no fatigue)</li>
+            </ul>
+          </div>
+          <div class="module-box">
+            <h3>Cryptographic Audit</h3>
+            <p>Court-admissible tamper-evident event logging.</p>
+            <ul>
+              <li>Chained SHA-256 event hashes</li>
+              <li>Actor, timestamp, IP, diff</li>
+              <li>100% integrity audit explorer</li>
+            </ul>
+          </div>
+          <div class="module-box">
+            <h3>Release & NOC Engine</h3>
+            <p>Maker-checker payout & statutory discharge workflow.</p>
+            <ul>
+              <li>Release locked below L2</li>
+              <li>Competent Authority e-sign</li>
+              <li>QR-signed digital NOC</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data & Persistence Layer -->
+        <div class="data-layer">
+          <div class="data-box">
+            <strong>🗄️ PostgreSQL 16 (Relational System of Record)</strong>
+            <span>Row-Level Security (RLS) enforces regional office data isolation; versioned JSONB rulesets by APH edition.</span>
+          </div>
+          <div class="data-box">
+            <strong>📦 S3-Compatible Encrypted Object Store</strong>
+            <span>MinIO / Empanelled India Cloud storage for FDR scans, affidavits, and bank confirmation letters.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Integration & Regulatory Adapters -->
+    <div class="column">
+      <div class="card" style="height: 100%;">
+        <div class="card-title">3. Sovereign Adapters</div>
+        <div class="actor-node">
+          <strong>🏛️ AICTE Portal Sync</strong>
+          <span>Nightly read-only sync of institution master, approval statuses & intake capacity.</span>
+        </div>
+        <div class="actor-node">
+          <strong>🏦 SFMS / NeSL e-BG Gateway</strong>
+          <span>Standardized message adapter (MT760/760COV) for bank guarantee confirmations.</span>
+        </div>
+        <div class="actor-node">
+          <strong>📲 NIC SMS & Gov Email</strong>
+          <span>Pluggable notification gateway with multi-channel fallback & retry queues.</span>
+        </div>
+        <div class="actor-node">
+          <strong>📋 RBI IFSC Reference Data</strong>
+          <span>Periodic import of authorized commercial bank branches & clearing codes.</span>
+        </div>
+        <div class="actor-node" style="margin-bottom:0; background:#064e3b; border-color:#059669;">
+          <strong style="color:#6ee7b7;">⚖️ Statutory Compliance</strong>
+          <span style="color:#d1fae5;">AICTE APH Clause 7.51 • CERT-In 6-Hr Clock • DPDP Rules 2025/2027 Residency.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <span>AICTE Regulation Bureau • Problem Statement ID 26265 • Team Phra Uma Thewi</span>
+    <span>Architecture Standard: OWASP ASVS Level 2 • GIGW 3.0 • MeitY Empanelled Cloud Architecture</span>
+  </div>
+</body>
+</html>

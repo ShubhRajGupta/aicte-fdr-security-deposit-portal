@@ -1,0 +1,119 @@
+{
+  "team_name": "Phra Uma Thewi",
+  "project_name_format": "HINDI WORD \u2014 Full Technical Expansion",
+  "geometry_rule": {
+    "preserve_top_reserved_band": true,
+    "preserve_bottom_reserved_band": true,
+    "partition_body": true,
+    "primary_to_supporting_ratio": "about 2:1 where the template allows",
+    "target_use_of_body_area": "85-95% useful content, never filler",
+    "do_not_move_or_resize_template_shapes": true
+  },
+  "style": {
+    "font": "Arial",
+    "no_emojis": true,
+    "short_fragments": true,
+    "number_steps": true,
+    "per_slide_numeric_citation": true,
+    "selective_emphasis": true
+  },
+  "narrative_rule": "Slide 1 carries mandatory identifiers. Slides 2-5 focus on approach, research, ground reality, engineering maturity, feasibility and measurable outcomes. Do not restate the PS description.",
+  "slides": [
+    {
+      "slide": 1,
+      "purpose": "official identity + project visual",
+      "partitions": [
+        "metadata panel",
+        "project name/visual region"
+      ],
+      "required": [
+        "exact PS ID/title/theme/category where required",
+        "current Team ID",
+        "team name Phra Uma Thewi",
+        "PS metadata citation"
+      ],
+      "avoid": [
+        "problem explanation",
+        "old sample IDs/project/metrics"
+      ]
+    },
+    {
+      "slide": 2,
+      "purpose": "solution mechanism",
+      "partitions": [
+        "one-line technical proposition",
+        "large workflow/user journey diagram",
+        "differentiator and maturity panel"
+      ],
+      "required": [
+        "Hindi-word acronym + expansion",
+        "numbered input-to-output flow",
+        "actual prototype status",
+        "sources for methods/alternatives"
+      ],
+      "avoid": [
+        "problem-statement paraphrase",
+        "unverified superlatives"
+      ]
+    },
+    {
+      "slide": 3,
+      "purpose": "technical approach",
+      "partitions": [
+        "large architecture/data flow",
+        "technology-choice table",
+        "data/protocol/security/fallback panel"
+      ],
+      "required": [
+        "numbered flow",
+        "components and interfaces",
+        "technology rationale",
+        "per-claim citations"
+      ]
+    },
+    {
+      "slide": 4,
+      "purpose": "feasibility and viability",
+      "partitions": [
+        "roadmap/maturity gates",
+        "resources/dependencies",
+        "risk/mitigation/fallback table"
+      ],
+      "required": [
+        "now vs hackathon build vs later",
+        "tests and acceptance thresholds",
+        "operational constraints",
+        "realistic costs/dependencies when known"
+      ]
+    },
+    {
+      "slide": 5,
+      "purpose": "impact grounded in people/workflows",
+      "partitions": [
+        "beneficiary-to-outcome matrix",
+        "real photo/prototype/chart/diagram",
+        "baseline-target-result panel"
+      ],
+      "required": [
+        "source-backed real-world constraint",
+        "outcome measurement",
+        "target vs measured distinction",
+        "caveats and scale conditions"
+      ]
+    },
+    {
+      "slide": 6,
+      "purpose": "research and references",
+      "partitions": [
+        "official/ground reality sources",
+        "papers/standards/frameworks",
+        "datasets/APIs/images/benchmarks"
+      ],
+      "required": [
+        "resolve every numeric citation on slides 1-5",
+        "full real references and URLs/DOIs",
+        "visual/data attribution"
+      ]
+    }
+  ]
+}
