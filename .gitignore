@@ -1,48 +1,42 @@
-# GSD Session State — volatile session files excluded from git
-.gsd/STATE.md
-.gsd/JOURNAL.md
-.gsd/TODO.md
-.gsd/phases/*/*-TEMP-*.md
-
-# OS
+# OS & System Files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDE & Editors
+# IDE & Editor Configs
 .idea/
 .vscode/
 *.iml
 *.iws
 
-# Build outputs
-target/
-build/
+# Build Outputs & Package Managers
 dist/
-node_modules/
+build/
+target/
 .gradle/
+node_modules/
 
-# Secrets
+# Environment & Secret Keys
 *.env
-.env.*
+*.env.*
 secrets/
 **/application-prod.yml
 **/application-production.yml
 
-# Test artifacts
+# Testing, Logs & Reports
 *.log
 coverage/
 playwright-report/
 test-results/
 
-# Temporary & Lock files
+# Temporary & Lock Files
 *.tmp
 *.bak
 *.swp
 ~$*
 *.crdownload
 
-# LaTeX intermediate build outputs
+# LaTeX Intermediate Build Artifacts
 *.aux
 *.lof
 *.lot
@@ -52,9 +46,30 @@ test-results/
 *.fdb_latexmk
 *.synctex.gz
 
+# Internal AI Coding Agent Caches
+.agent/
+.agents/
+.gemini/
+ui skill/
+
+# Volatile GSD Session State
+.gsd/STATE.md
+.gsd/JOURNAL.md
+.gsd/TODO.md
+.gsd/phases/*/*-TEMP-*.md
+
 # Unwanted presentations, scratch files & artifacts
 Phra Uma Thewi.pptx
 AAAAAAAAAAAAAAPPT/
 qa_report.json
 template_integrity.json
 template_map.json
+ppt_docs/
+report/
+
+# Binary document exclusion (allow canonical files in docs/presentation and docs/report)
+*.docx
+*.pptx
+!docs/presentation/*.pptx
+!docs/presentation/*.pdf
+!docs/report/*.pdf
