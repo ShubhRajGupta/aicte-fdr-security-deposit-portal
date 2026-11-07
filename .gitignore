@@ -73,3 +73,15 @@ report/
 !docs/presentation/*.pptx
 !docs/presentation/*.pdf
 !docs/report/*.pdf
+
+.gsd
+
+*.md
+
+*.txt    
+
+*.pdf
+
+.md
+
+.env
