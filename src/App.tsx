@@ -75,6 +75,8 @@ export const AppContent: React.FC = () => {
         return <AutomatedReportsPortal />;
       case 'ROI_SLIDES':
         return <MeasurableImpact />;
+      case 'LOGIN_DEMO':
+        return <LoginPage onLoginSuccess={login} />;
       default:
         return <BureauDashboard />;
     }

@@ -95,9 +95,9 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [personas] = useState<UserPersona[]>(SEED_PERSONAS);
   
-  // Auth state: check if session token exists
+  // Auth state: Default to true in Demo Evaluation mode so evaluators immediately explore the portal
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return Boolean(localStorage.getItem('aicte_auth_token'));
+    return localStorage.getItem('aicte_explicit_logout') !== 'true';
   });
 
   const [activePersona, setActivePersona] = useState<UserPersona>(() => {
@@ -183,9 +183,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           setIsTimeoutWarningOpen(true);
         }
         if (prev <= 1) {
-          logout();
-          addToast('error', 'Session Expired', 'You have been logged out due to inactivity per NIST guidelines.');
-          return 0;
+          // Demo safeguard: auto-renew session so evaluators are never disrupted
+          extendSession();
+          return 900;
         }
         return prev - 1;
       });
@@ -204,6 +204,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const login = (user: UserPersona) => {
     setActivePersona(user);
     setIsAuthenticated(true);
+    localStorage.removeItem('aicte_explicit_logout');
     localStorage.setItem('aicte_auth_token', `aicte_token_${Date.now()}`);
     localStorage.setItem('aicte_active_user', JSON.stringify(user));
 
@@ -225,6 +226,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     apiClient.logout();
     setIsAuthenticated(false);
     setIsTimeoutWarningOpen(false);
+    localStorage.setItem('aicte_explicit_logout', 'true');
     localStorage.removeItem('aicte_auth_token');
     localStorage.removeItem('aicte_active_user');
   };

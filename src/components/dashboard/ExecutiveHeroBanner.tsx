@@ -1,4 +1,5 @@
 import React from 'react';
+import { Landmark, ShieldCheck } from 'lucide-react';
 
 export const ExecutiveHeroBanner: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ export const ExecutiveHeroBanner: React.FC = () => {
         <div
           style={{
             position: 'relative',
-            backgroundImage: 'url(/assets/indian-parliament.jpg)',
+            backgroundImage: 'url(./assets/indian-parliament.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
             minHeight: '160px',
@@ -104,19 +105,19 @@ export const ExecutiveHeroBanner: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Official Government Leadership Dignitary Cards */}
+        {/* Right: Sovereign Institutional Authority & Security Standards */}
         <div
           style={{
             background: '#f8fafc',
             borderLeft: '1px solid #cbd5e1',
-            padding: '12px 14px',
+            padding: '14px 16px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             gap: '10px'
           }}
         >
-          {/* Card 1: Hon'ble Minister Dharmendra Pradhan */}
+          {/* Card 1: Statutory Authority */}
           <div
             style={{
               display: 'flex',
@@ -124,36 +125,39 @@ export const ExecutiveHeroBanner: React.FC = () => {
               gap: '10px',
               background: '#ffffff',
               border: '1px solid #e2e8f0',
-              padding: '6px 8px',
+              padding: '8px 10px',
               borderRadius: '2px'
             }}
           >
-            <img
-              src="./assets/leadership/minister-pradhan.jpg"
-              alt="Shri Dharmendra Pradhan"
+            <div
               style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '2px solid #003366',
+                width: '38px',
+                height: '38px',
+                borderRadius: '4px',
+                background: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 flexShrink: 0
               }}
-            />
-            <div style={{ lineHeight: 1.2 }}>
+            >
+              <Landmark size={20} style={{ color: '#1e3a8a' }} />
+            </div>
+            <div style={{ lineHeight: 1.25 }}>
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#002147' }}>
-                Shri Dharmendra Pradhan
+                All India Council for Technical Education
               </div>
-              <div style={{ fontSize: '9px', color: '#475569', fontWeight: 600, marginTop: '1px' }}>
-                Hon'ble Union Minister of Education
+              <div style={{ fontSize: '9px', color: '#475569', fontWeight: 600, marginTop: '2px' }}>
+                Statutory Regulatory Bureau (HQ, New Delhi)
               </div>
-              <div style={{ fontSize: '9px', color: '#64748b', marginTop: '2px' }}>
-                Government of India
+              <div style={{ fontSize: '9px', color: '#16a34a', fontWeight: 700, marginTop: '2px' }}>
+                AICTE Act, 1987 · Regulation Enclave
               </div>
             </div>
           </div>
 
-          {/* Card 2: Hon'ble Chairman Prof. T. G. Sitharam */}
+          {/* Card 2: Cryptographic Standards */}
           <div
             style={{
               display: 'flex',
@@ -161,31 +165,34 @@ export const ExecutiveHeroBanner: React.FC = () => {
               gap: '10px',
               background: '#ffffff',
               border: '1px solid #e2e8f0',
-              padding: '6px 8px',
+              padding: '8px 10px',
               borderRadius: '2px'
             }}
           >
-            <img
-              src="./assets/leadership/chairman-sitharam.png"
-              alt="Prof. T. G. Sitharam"
+            <div
               style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '2px solid #f37022',
+                width: '38px',
+                height: '38px',
+                borderRadius: '4px',
+                background: '#f0fdf4',
+                border: '1px solid #bbf7d0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 flexShrink: 0
               }}
-            />
-            <div style={{ lineHeight: 1.2 }}>
+            >
+              <ShieldCheck size={20} style={{ color: '#16a34a' }} />
+            </div>
+            <div style={{ lineHeight: 1.25 }}>
               <div style={{ fontSize: '11px', fontWeight: 800, color: '#002147' }}>
-                Prof. T. G. Sitharam
+                Zero-Trust Cryptographic Ledger
               </div>
-              <div style={{ fontSize: '9px', color: '#475569', fontWeight: 600, marginTop: '1px' }}>
-                Hon'ble Chairman, AICTE
+              <div style={{ fontSize: '9px', color: '#475569', fontWeight: 600, marginTop: '2px' }}>
+                SHA-256 Merkle Hash Continuity &amp; QR NOC
               </div>
-              <div style={{ fontSize: '9px', color: '#64748b', marginTop: '2px' }}>
-                New Delhi HQ
+              <div style={{ fontSize: '9px', color: '#2563eb', fontWeight: 700, marginTop: '2px' }}>
+                7 Scheduled Banks API Integrated
               </div>
             </div>
           </div>

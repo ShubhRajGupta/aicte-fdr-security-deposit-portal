@@ -15,7 +15,8 @@ import {
   Terminal,
   FileSpreadsheet,
   Printer,
-  FileText
+  FileText,
+  Lock
 } from 'lucide-react';
 
 export const Navigation: React.FC = () => {
@@ -81,6 +82,11 @@ export const Navigation: React.FC = () => {
       id: 'ROI_SLIDES',
       label: language === 'HI' ? 'परिषद एमआईएस' : 'Council MIS',
       icon: <TrendingUp size={13} />
+    },
+    {
+      id: 'LOGIN_DEMO',
+      label: language === 'HI' ? 'लॉगिन द्वार (2FA)' : 'Login & 2FA Gate',
+      icon: <Lock size={13} />
     }
   ];
 

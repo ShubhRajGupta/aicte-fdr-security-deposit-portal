@@ -254,6 +254,70 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
 
       {/* 3. Sovereign Multi-Portal Access Gateway Body */}
       <div style={{ flex: 1, padding: '1.5rem', maxWidth: '1280px', margin: '0 auto', width: '100%' }}>
+        {/* Interactive Evaluator & Demo Gateway Banner */}
+        <div
+          style={{
+            background: 'linear-gradient(90deg, #eff6ff 0%, #f0fdf4 100%)',
+            border: '1px solid #bfdbfe',
+            borderRadius: '4px',
+            padding: '12px 18px',
+            marginBottom: '1.25rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '12px',
+            boxShadow: '0 2px 6px rgba(0, 33, 71, 0.05)'
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  background: '#2563eb',
+                  color: '#ffffff',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  padding: '2px 8px',
+                  borderRadius: '3px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                SIH 2026 Evaluation Prototype
+              </span>
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#1e3a8a' }}>
+                All modules are unlocked for review
+              </span>
+            </div>
+            <div style={{ fontSize: '11px', color: '#475569', marginTop: '3px' }}>
+              Authentication is entirely optional on this demo deployment. You can test the official NIST 800-63B login flow below, or jump directly into the live portal.
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onLoginSuccess(personas[0])}
+            style={{
+              background: '#002147',
+              color: '#ffffff',
+              border: '1px solid #003366',
+              padding: '9px 18px',
+              fontSize: '12px',
+              fontWeight: 700,
+              borderRadius: '4px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 2px 6px rgba(0,33,71,0.2)'
+            }}
+          >
+            <span>Explore Live Portal Directly (Skip Login)</span>
+            <ArrowRight size={14} style={{ color: '#f97316' }} />
+          </button>
+        </div>
+
         {/* Interactive Login Container */}
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(340px, 490px) 1fr', gap: '1.5rem', alignItems: 'start' }}>
           {/* Left Column: Official Form & Gateway Access Box */}
@@ -452,6 +516,58 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                   <Lock size={14} />
                   <span>{isSubmitting ? 'Verifying Credentials...' : 'Sign In Securely'}</span>
                 </button>
+
+                {/* Evaluator Convenience Tools */}
+                <div style={{ marginTop: '8px', display: 'flex', gap: '8px' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCaptchaInput(captchaCode);
+                      setPassword('Aicte@Password2026');
+                    }}
+                    style={{
+                      flex: 1,
+                      background: '#f1f5f9',
+                      border: '1px solid #cbd5e1',
+                      padding: '5px 8px',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      color: '#334155',
+                      cursor: 'pointer',
+                      borderRadius: '2px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <Sparkles size={12} style={{ color: '#f97316' }} />
+                    <span>Auto-Fill Demo Credentials &amp; Captcha</span>
+                  </button>
+                  {isLocked && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsLocked(false);
+                        setFailedAttempts(0);
+                        setLockCountdown(0);
+                        setErrorMessage(null);
+                      }}
+                      style={{
+                        background: '#fee2e2',
+                        border: '1px solid #fca5a5',
+                        padding: '5px 8px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        color: '#b91c1c',
+                        cursor: 'pointer',
+                        borderRadius: '2px'
+                      }}
+                    >
+                      Reset Lockout
+                    </button>
+                  )}
+                </div>
               </form>
 
               {/* Pre-Authorized Sector Demonstrator Entry */}
@@ -674,43 +790,47 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                   />
                 </div>
 
-                {/* Real Leadership Portraits */}
-                <div style={{ display: 'flex', gap: '18px', alignItems: 'center', paddingTop: '8px', borderTop: '1px solid rgba(255,255,255,0.18)' }}>
+                {/* Sovereign Institutional Pillars */}
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.18)', flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <img
-                      src="./assets/leadership/minister-pradhan.jpg"
-                      alt="Shri Dharmendra Pradhan"
+                    <div
                       style={{
-                        width: '40px',
-                        height: '40px',
+                        width: '32px',
+                        height: '32px',
                         borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px solid #ff9933',
-                        background: '#ffffff'
+                        background: 'rgba(255, 153, 51, 0.2)',
+                        border: '1.5px solid #ff9933',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                       }}
-                    />
+                    >
+                      <Landmark size={15} style={{ color: '#ff9933' }} />
+                    </div>
                     <div>
-                      <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>Shri Dharmendra Pradhan</div>
-                      <div style={{ fontSize: '9px', color: '#ff9933' }}>Hon'ble Minister of Education</div>
+                      <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>Statutory Regulatory Body</div>
+                      <div style={{ fontSize: '9px', color: '#ff9933' }}>AICTE Act, 1987 • Regulation Bureau</div>
                     </div>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <img
-                      src="./assets/leadership/chairman-sitharam.png"
-                      alt="Prof. T. G. Sitharam"
+                    <div
                       style={{
-                        width: '40px',
-                        height: '40px',
+                        width: '32px',
+                        height: '32px',
                         borderRadius: '50%',
-                        objectFit: 'cover',
-                        border: '2px solid #138808',
-                        background: '#ffffff'
+                        background: 'rgba(34, 197, 94, 0.2)',
+                        border: '1.5px solid #22c55e',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                       }}
-                    />
+                    >
+                      <ShieldCheck size={15} style={{ color: '#22c55e' }} />
+                    </div>
                     <div>
-                      <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>Prof. T. G. Sitharam</div>
-                      <div style={{ fontSize: '9px', color: '#86efac' }}>Chairman, AICTE New Delhi</div>
+                      <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffffff' }}>Zero-Trust Cryptographic Ledger</div>
+                      <div style={{ fontSize: '9px', color: '#86efac' }}>SHA-256 Merkle Chain &amp; QR NOC</div>
                     </div>
                   </div>
                 </div>
@@ -793,7 +913,24 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               </div>
 
               <div className="gov-alert gov-alert-info" style={{ fontSize: '0.75rem', marginBottom: '1rem', textAlign: 'center' }}>
-                <strong>Demo Passcode:</strong> Enter <code className="font-mono" style={{ fontWeight: 800, color: 'var(--gov-navy-dark)' }}>262650</code> to authenticate.
+                <div><strong>Demo Passcode:</strong> Enter <code className="font-mono" style={{ fontWeight: 800, color: 'var(--gov-navy-dark)' }}>262650</code> to authenticate.</div>
+                <button
+                  type="button"
+                  onClick={() => setOtpInput('262650')}
+                  style={{
+                    marginTop: '6px',
+                    background: '#2563eb',
+                    color: '#ffffff',
+                    border: 'none',
+                    padding: '4px 10px',
+                    borderRadius: '2px',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  ⚡ 1-Click Auto-Fill Demo OTP (262650)
+                </button>
               </div>
 
               <form onSubmit={handleOtpVerify}>

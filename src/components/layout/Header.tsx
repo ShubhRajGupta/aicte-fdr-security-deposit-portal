@@ -30,7 +30,8 @@ export const Header: React.FC = () => {
     language,
     setLanguage,
     logout,
-    sessionRemainingSeconds
+    sessionRemainingSeconds,
+    setActiveTab
   } = useApp();
 
   const [showPersonaMenu, setShowPersonaMenu] = useState(false);
@@ -427,6 +428,127 @@ export const Header: React.FC = () => {
             <strong>APH 2024-27 Clause 1.4:</strong> All FDRs / JFDRs must be issued by a Scheduled Commercial Bank in joint name with "Member Secretary, AICTE New Delhi" with official lien endorsement. Instruments without bank confirmation remain at Trust Level L0. Encashment / NOC release requires Trust Level L2 verification.
           </span>
         )}
+      </div>
+
+      {/* 4. Live Demo & Evaluator Quick Bar */}
+      <div
+        style={{
+          background: 'linear-gradient(90deg, #071931 0%, #0f3057 50%, #002147 100%)',
+          borderBottom: '1px solid #1e3a8a',
+          padding: '6px 16px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '8px',
+          color: '#ffffff'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span
+            style={{
+              background: '#16a34a',
+              color: '#ffffff',
+              fontSize: '9px',
+              fontWeight: 800,
+              padding: '2px 7px',
+              borderRadius: '2px',
+              letterSpacing: '0.04em',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ffffff' }} />
+            DEMO MODE UNLOCKED
+          </span>
+          <span style={{ fontSize: '11px', color: '#cbd5e1' }}>
+            Switch persona to test workflows:
+          </span>
+          <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+            {personas.map((p) => {
+              const isSelected = activePersona.id === p.id;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => {
+                    setActivePersona(p);
+                    if (p.role.includes('INSTITUTION')) {
+                      setActiveTab('INSTITUTION_PORTAL');
+                    } else if (p.role === 'BANK_OFFICER') {
+                      setActiveTab('BANK_CONFIRM');
+                    } else if (p.role.includes('AUDITOR')) {
+                      setActiveTab('AUDIT_EXPLORER');
+                    } else {
+                      setActiveTab('DASHBOARD');
+                    }
+                  }}
+                  style={{
+                    background: isSelected ? '#f97316' : 'rgba(255, 255, 255, 0.12)',
+                    color: '#ffffff',
+                    border: isSelected ? '1px solid #fb923c' : '1px solid rgba(255, 255, 255, 0.22)',
+                    padding: '3px 8px',
+                    borderRadius: '2px',
+                    fontSize: '10px',
+                    fontWeight: isSelected ? 800 : 500,
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title={`Switch to ${p.name} (${p.title})`}
+                >
+                  {p.role === 'BUREAU_OFFICER' && '🏛️ '}
+                  {p.role.includes('INSTITUTION') && '🏫 '}
+                  {p.role === 'BANK_OFFICER' && '🏦 '}
+                  {p.role.includes('AUDITOR') && '⚖️ '}
+                  {p.name.split(' ')[0]} ({p.badge ? p.badge.split(' ')[0] : 'Role'})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            onClick={() => setIsTimeTravelOpen(true)}
+            style={{
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              padding: '3px 9px',
+              fontSize: '10px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              borderRadius: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            title="Fast-forward calendar date to test T-90 alerts & maturity"
+          >
+            <Clock size={11} style={{ color: '#38bdf8' }} />
+            <span>Time Travel (T-90)</span>
+          </button>
+          <button
+            onClick={() => setIsScenarioGuideOpen(true)}
+            style={{
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              padding: '3px 9px',
+              fontSize: '10px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              borderRadius: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+            title="Open SIH 2026 Test Scenario Guide"
+          >
+            <Sparkles size={11} style={{ color: '#facc15' }} />
+            <span>Guided Scenarios</span>
+          </button>
+        </div>
       </div>
     </header>
   );

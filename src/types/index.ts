@@ -245,7 +245,8 @@ export type ActiveTab =
   | 'RULE_SANDBOX'
   | 'API_EXPLORER'
   | 'REPORTS'
-  | 'ROI_SLIDES';
+  | 'ROI_SLIDES'
+  | 'LOGIN_DEMO';
 
 export type AppLanguage = 'EN' | 'HI';
 

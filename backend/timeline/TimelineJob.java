@@ -22,3 +22,4 @@ public class TimelineJob {
         log.info("Running daily 01:30 IST timeline sweep for reference date: {}", LocalDate.now());
     }
 }
+

@@ -21,3 +21,4 @@ public enum RuleCode {
     public String getMessage() { return message; }
     public String getSeverity() { return severity; }
 }
+

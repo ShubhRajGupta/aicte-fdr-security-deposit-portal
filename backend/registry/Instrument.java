@@ -21,3 +21,4 @@ public record Instrument(
     boolean lienMarked,
     int riskScore
 ) {}
+
