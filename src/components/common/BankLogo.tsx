@@ -98,3 +98,4 @@ export const BankLogo: React.FC<BankLogoProps> = ({
     </div>
   );
 };
+

@@ -238,3 +238,4 @@ fs.writeFileSync(path.join(stampsDir, 'stamp-noc-released.svg'), greenNocStampSv
 fs.writeFileSync(path.join(stampsDir, 'guilloche-pattern.svg'), guillocheSvg);
 
 console.log('Successfully generated 10 vector SVG assets in public/assets/badges and public/assets/stamps!');
+
