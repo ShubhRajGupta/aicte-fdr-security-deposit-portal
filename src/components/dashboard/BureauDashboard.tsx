@@ -2,6 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { TrustBadge } from '../common/TrustBadge';
 import { StatusBadge } from '../common/StatusBadge';
+import { BankLogo } from '../common/BankLogo';
 import { HeatmapCalendar } from './HeatmapCalendar';
 import { ExecutiveHeroBanner } from './ExecutiveHeroBanner';
 import { ProcessLifecyclePoster } from './ProcessLifecyclePoster';
@@ -82,88 +83,106 @@ export const BureauDashboard: React.FC = () => {
       {/* 2. Executive Hero Banner & Leadership Cards */}
       <ExecutiveHeroBanner />
 
-      {/* 3. Primary Executive MIS Metric Strip (Dense Government Layout) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px', marginBottom: '14px' }}>
+      {/* 3. Primary Executive MIS Metric Strip (Dense Government Layout with Visual Badges) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '10px', marginBottom: '14px' }}>
         {/* Total Value */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #003366' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#475569', fontSize: '10px', fontWeight: 700 }}>
-            <span>TOTAL DEPOSITS</span>
-            <IndianRupee size={12} style={{ color: '#003366' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #002147', background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#475569', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>TOTAL DEPOSITS</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e0e7ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <IndianRupee size={12} style={{ color: '#002147' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#002147', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#002147', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             ₹{(totalValue / 10000000).toFixed(2)} Cr
           </div>
-          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#2563eb' }} />
             {instruments.length} Registered Instruments
           </div>
         </div>
 
         {/* Active Coverage */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #15803d' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#475569', fontSize: '10px', fontWeight: 700 }}>
-            <span>ACTIVE COMPLIANT</span>
-            <CheckCircle size={12} style={{ color: '#15803d' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #15803d', background: 'linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#166534', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>ACTIVE COMPLIANT</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CheckCircle size={12} style={{ color: '#15803d' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#15803d', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#15803d', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {activeCount}
           </div>
-          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#166534', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#16a34a' }} />
             Continuous Legal Cover
           </div>
         </div>
 
         {/* Expiring <90 Days */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #b45309', background: expiringCount > 0 ? '#fffbeb' : '#ffffff' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#92400e', fontSize: '10px', fontWeight: 700 }}>
-            <span>EXPIRING (&lt;90D)</span>
-            <Clock size={12} style={{ color: '#b45309' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #b45309', background: 'linear-gradient(180deg, #ffffff 0%, #fffbeb 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#92400e', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>EXPIRING (&lt;90D)</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Clock size={12} style={{ color: '#b45309' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#b45309', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#b45309', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {expiringCount}
           </div>
-          <div style={{ fontSize: '10px', color: '#92400e', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#92400e', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#d97706' }} />
             Statutory T-90 Notices
           </div>
         </div>
 
         {/* Overdue */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #b91c1c', background: overdueCount > 0 ? '#fef2f2' : '#ffffff' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#991b1b', fontSize: '10px', fontWeight: 700 }}>
-            <span>OVERDUE / LAPSED</span>
-            <AlertOctagon size={12} style={{ color: '#b91c1c' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #b91c1c', background: 'linear-gradient(180deg, #ffffff 0%, #fef2f2 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#991b1b', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>OVERDUE / LAPSED</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <AlertOctagon size={12} style={{ color: '#b91c1c' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#b91c1c', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#b91c1c', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {overdueCount}
           </div>
-          <div style={{ fontSize: '10px', color: '#991b1b', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#991b1b', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#dc2626' }} />
             Encashment Action Due
           </div>
         </div>
 
         {/* Scrutiny Queue */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #475569' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#475569', fontSize: '10px', fontWeight: 700 }}>
-            <span>UNDER SCRUTINY</span>
-            <FileText size={12} style={{ color: '#475569' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #475569', background: 'linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#475569', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>UNDER SCRUTINY</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <FileText size={12} style={{ color: '#475569' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#1e293b', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#1e293b', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {scrutinyCount}
           </div>
-          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#475569' }} />
             Awaiting Officer Scrutiny
           </div>
         </div>
 
         {/* NOC Issued */}
-        <div className="gov-panel" style={{ padding: '8px 10px', margin: 0, borderRadius: '0px', borderTop: '2px solid #0369a1' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#475569', fontSize: '10px', fontWeight: 700 }}>
-            <span>NOC ISSUED</span>
-            <Award size={12} style={{ color: '#0369a1' }} />
+        <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #0369a1', background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ color: '#0369a1', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>NOC ISSUED</span>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e0f2fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Award size={12} style={{ color: '#0369a1' }} />
+            </div>
           </div>
-          <div style={{ fontSize: '17px', fontWeight: 800, color: '#0369a1', marginTop: '2px', fontFamily: 'var(--font-mono)' }}>
+          <div style={{ fontSize: '18px', fontWeight: 900, color: '#0369a1', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {releasedCount}
           </div>
-          <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>
+          <div style={{ fontSize: '10px', color: '#0369a1', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#0284c7' }} />
             Digital Lien Discharged
           </div>
         </div>
@@ -298,8 +317,13 @@ export const BureauDashboard: React.FC = () => {
                       <div style={{ fontSize: '10px', color: '#64748b' }}>AICTE ID: {inst.institutionAicteId} · Region: {inst.region}</div>
                     </td>
                     <td>
-                      <div>{inst.bankName}</div>
-                      <div style={{ fontSize: '10px', color: '#64748b' }}>IFSC: {inst.ifscCode} · {inst.branchName}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <BankLogo bankName={inst.bankName} size="sm" />
+                        <div>
+                          <div style={{ fontWeight: 600, color: '#002147' }}>{inst.bankName}</div>
+                          <div style={{ fontSize: '10px', color: '#64748b' }}>IFSC: {inst.ifscCode} · {inst.branchName}</div>
+                        </div>
+                      </div>
                     </td>
                     <td style={{ textAlign: 'right', fontWeight: 700, color: '#15803d', fontFamily: 'var(--font-mono)' }}>
                       {inst.formattedAmount}

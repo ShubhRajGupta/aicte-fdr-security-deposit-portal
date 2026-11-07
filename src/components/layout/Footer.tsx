@@ -110,6 +110,64 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
+      {/* Official Government Agencies & Security Certification Showcase */}
+      <div
+        style={{
+          background: '#07162c',
+          borderTop: '1px solid #1e3a8a',
+          borderBottom: '1px solid #001733',
+          padding: '14px 20px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '24px',
+          flexWrap: 'wrap'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/badges/nic.svg"
+            alt="National Informatics Centre"
+            style={{ height: '36px', width: 'auto', background: '#ffffff', borderRadius: '3px', padding: '2px 4px' }}
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/digital-india.svg"
+            alt="Digital India"
+            style={{ height: '36px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/badges/cert-in.svg"
+            alt="CERT-In Cyber Secured"
+            style={{ height: '36px', width: 'auto', borderRadius: '3px' }}
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/badges/digilocker.svg"
+            alt="DigiLocker Verified"
+            style={{ height: '36px', width: 'auto', borderRadius: '3px' }}
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/badges/gigw.svg"
+            alt="GIGW 3.0 Compliant"
+            style={{ height: '36px', width: 'auto', borderRadius: '3px' }}
+          />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img
+            src="./assets/badges/iso27001.svg"
+            alt="ISO 27001 Certified ISMS"
+            style={{ height: '36px', width: 'auto', borderRadius: '3px' }}
+          />
+        </div>
+      </div>
+
       {/* Bottom Legal, Hosting, and Certification Strip */}
       <div className="gov-footer-bottom">
         <div>

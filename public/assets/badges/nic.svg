@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <rect width="200" height="50" fill="#ffffff" rx="4"/>
+  <rect x="0" y="0" width="66.6" height="3" fill="#f97316"/>
+  <rect x="66.6" y="0" width="66.6" height="3" fill="#ffffff"/>
+  <rect x="133.2" y="0" width="66.8" height="3" fill="#16a34a"/>
+  <g transform="translate(8, 8)">
+    <circle cx="17" cy="17" r="16" fill="#002147"/>
+    <circle cx="17" cy="17" r="12" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 1.5"/>
+    <path d="M17 5 L17 29 M5 17 L29 17 M8.5 8.5 L25.5 25.5 M8.5 25.5 L25.5 8.5" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+    <circle cx="17" cy="17" r="4" fill="#f97316"/>
+  </g>
+  <text x="48" y="20" font-family="'Inter', sans-serif" font-size="14" font-weight="900" fill="#002147" letter-spacing="1">NIC</text>
+  <text x="48" y="31" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#0284c7">राष्ट्रीय सूचना विज्ञान केंद्र</text>
+  <text x="48" y="41" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#475569">National Informatics Centre</text>
+</svg>

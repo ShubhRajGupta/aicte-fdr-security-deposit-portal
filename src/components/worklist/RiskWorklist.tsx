@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { TrustBadge } from '../common/TrustBadge';
 import { StatusBadge } from '../common/StatusBadge';
+import { BankLogo } from '../common/BankLogo';
 import { Instrument, TrustLevel, InstrumentStatus } from '../../types';
 import {
   ListOrdered,
@@ -212,9 +213,14 @@ export const RiskWorklist: React.FC = () => {
 
                       {/* Bank Details */}
                       <td>
-                        <div>{inst.bankName}</div>
-                        <div style={{ fontSize: '10px', color: '#64748b' }}>
-                          {inst.ifscCode} · {inst.branchName}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <BankLogo bankName={inst.bankName} size="sm" />
+                          <div>
+                            <div style={{ fontWeight: 600, color: '#002147' }}>{inst.bankName}</div>
+                            <div style={{ fontSize: '10px', color: '#64748b' }}>
+                              {inst.ifscCode} · {inst.branchName}
+                            </div>
+                          </div>
                         </div>
                       </td>
 

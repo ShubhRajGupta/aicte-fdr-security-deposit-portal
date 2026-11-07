@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { TrustBadge } from '../common/TrustBadge';
 import { StatusBadge } from '../common/StatusBadge';
+import { BankLogo } from '../common/BankLogo';
 import {
   FileText,
   ShieldCheck,
@@ -240,15 +241,20 @@ export const CaseWorkspace: React.FC = () => {
                 position: 'relative'
               }}
             >
-              {/* Bank Header */}
-              <div style={{ textAlign: 'center', borderBottom: '2px solid #002147', paddingBottom: '8px', marginBottom: '12px' }}>
-                <div style={{ fontSize: '15px', fontWeight: 900, color: '#002147', letterSpacing: '0.04em' }}>
-                  {instrument.bankName.toUpperCase()}
+              {/* Bank Header with Authentic Bank Logo */}
+              <div style={{ textAlign: 'center', borderBottom: '2px solid #002147', paddingBottom: '10px', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                  <BankLogo bankName={instrument.bankName} size="lg" />
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '15px', fontWeight: 900, color: '#002147', letterSpacing: '0.04em' }}>
+                      {instrument.bankName.toUpperCase()}
+                    </div>
+                    <div style={{ fontSize: '10px', color: '#475569' }}>
+                      {instrument.branchName} · IFSC: <strong>{instrument.ifscCode}</strong>
+                    </div>
+                  </div>
                 </div>
-                <div style={{ fontSize: '10px', color: '#475569' }}>
-                  {instrument.branchName} · IFSC: <strong>{instrument.ifscCode}</strong>
-                </div>
-                <div style={{ fontSize: '12px', fontWeight: 800, color: '#b45309', marginTop: '4px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 800, color: '#b45309', marginTop: '4px', letterSpacing: '0.04em' }}>
                   TERM / FIXED DEPOSIT RECEIPT (SPECIAL DEPOSIT ADVICE)
                 </div>
               </div>
@@ -277,27 +283,36 @@ export const CaseWorkspace: React.FC = () => {
                 </div>
               </div>
 
-              {/* Official AICTE Red Lien Stamp */}
+              {/* Official AICTE Red Lien Stamp & CBS Bank Verification Stamps */}
               <div
                 style={{
-                  border: '2px dashed #b91c1c',
-                  background: '#fef2f2',
-                  padding: '8px',
-                  borderRadius: '2px',
-                  textAlign: 'center',
-                  margin: '10px 0',
-                  color: '#991b1b'
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '12px',
+                  margin: '12px 0',
+                  flexWrap: 'wrap'
                 }}
               >
-                <div style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.05em' }}>
-                  ★ OFFICIAL STATUTORY LIEN MARKING ★
-                </div>
-                <div style={{ fontSize: '10px', fontWeight: 700, marginTop: '2px' }}>
-                  LIEN ENDORSED TO: MEMBER SECRETARY, AICTE NEW DELHI
-                </div>
-                <div style={{ fontSize: '9px', marginTop: '2px' }}>
-                  "Deposit shall not be encashed, pledged, or cancelled without explicit written NOC from AICTE."
-                </div>
+                <img
+                  src="./assets/stamps/stamp-lien-verified.svg"
+                  alt="AICTE Statutory Lien Verified"
+                  style={{ height: '70px', width: 'auto' }}
+                />
+                {instrument.trustLevel === 'L2' && (
+                  <img
+                    src="./assets/stamps/stamp-bank-confirmed.svg"
+                    alt="Scheduled Bank CBS Confirmed"
+                    style={{ height: '65px', width: 'auto' }}
+                  />
+                )}
+                {['NOC_ISSUED', 'RELEASED'].includes(instrument.status) && (
+                  <img
+                    src="./assets/stamps/stamp-noc-released.svg"
+                    alt="AICTE NOC Released"
+                    style={{ height: '70px', width: 'auto' }}
+                  />
+                )}
               </div>
 
               {/* Signatures */}
@@ -399,7 +414,11 @@ export const CaseWorkspace: React.FC = () => {
                 </div>
                 <div>
                   <span style={{ color: '#64748b' }}>Issuing Bank &amp; Branch:</span>
-                  <div style={{ fontWeight: 600 }}>{instrument.bankName} ({instrument.ifscCode})</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                    <BankLogo bankName={instrument.bankName} size="sm" />
+                    <span style={{ fontWeight: 700, color: '#002147' }}>{instrument.bankName}</span>
+                  </div>
+                  <div style={{ fontSize: '10px', color: '#64748b' }}>IFSC: {instrument.ifscCode} · {instrument.branchName}</div>
                 </div>
                 <div>
                   <span style={{ color: '#64748b' }}>Tenor &amp; Maturity:</span>

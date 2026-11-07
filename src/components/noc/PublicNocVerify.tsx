@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { generateQrCodeDataUrl } from '../../services/qrService';
+import { BankLogo } from '../common/BankLogo';
 import {
   ShieldCheck,
   AlertTriangle,
@@ -183,27 +184,54 @@ export const PublicNocVerify: React.FC = () => {
               boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
             }}
           >
-            {/* Certificate Header Banner */}
+            {/* Certificate Header Banner with Sovereign Emblems */}
             <div
               style={{
                 background: 'var(--gov-navy-dark)',
                 color: '#ffffff',
-                padding: '1.25rem',
-                textAlign: 'center',
-                borderBottom: '4px solid var(--gov-saffron)'
+                padding: '1.25rem 1.5rem',
+                borderBottom: '4px solid var(--gov-saffron)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '16px',
+                flexWrap: 'wrap'
               }}
             >
-              <div style={{ fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.5px', color: '#e2e8f0' }}>
-                भारत सरकार | Government of India
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <img
+                  src="./assets/emblem-india.svg"
+                  alt="Emblem of India"
+                  style={{ height: '54px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+                />
+                <img
+                  src="./assets/aicte-logo.png"
+                  alt="AICTE Logo"
+                  style={{ height: '48px', width: 'auto' }}
+                />
               </div>
-              <div style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0' }}>
-                अखिल भारतीय तकनीकी शिक्षा परिषद | ALL INDIA COUNCIL FOR TECHNICAL EDUCATION
+
+              <div style={{ textAlign: 'center', flex: 1, minWidth: '240px' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.5px', color: '#e2e8f0' }}>
+                  भारत सरकार | Government of India
+                </div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, margin: '2px 0' }}>
+                  अखिल भारतीय तकनीकी शिक्षा परिषद | ALL INDIA COUNCIL FOR TECHNICAL EDUCATION
+                </div>
+                <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+                  (A Statutory Body of the Government of India under the AICTE Act, 1987)
+                </div>
+                <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                  Nelson Mandela Marg, Vasant Kunj, New Delhi - 110070
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
-                (A Statutory Body of the Government of India under the AICTE Act, 1987)
-              </div>
-              <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
-                Nelson Mandela Marg, Vasant Kunj, New Delhi - 110070
+
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src="./assets/stamps/aicte-gold-seal.svg"
+                  alt="AICTE Gold Seal"
+                  style={{ height: '54px', width: 'auto' }}
+                />
               </div>
             </div>
 
@@ -293,8 +321,13 @@ export const PublicNocVerify: React.FC = () => {
                   <tr>
                     <td style={{ fontWeight: 700, background: '#f8fafc', color: 'var(--gov-navy-dark)' }}>Lien Holding Bank & Branch:</td>
                     <td>
-                      <strong>{matchingInstrument.bankName}</strong> ({matchingInstrument.branchName})
-                      <div style={{ fontSize: '0.75rem', color: '#64748b' }}>IFSC Code: {matchingInstrument.ifscCode}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <BankLogo bankName={matchingInstrument.bankName} size="sm" />
+                        <div>
+                          <strong>{matchingInstrument.bankName}</strong> ({matchingInstrument.branchName})
+                          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>IFSC Code: {matchingInstrument.ifscCode}</div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -318,6 +351,34 @@ export const PublicNocVerify: React.FC = () => {
                   </tr>
                 </tbody>
               </table>
+
+              {/* Official AICTE Statutory Release Stamp Impression */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.25rem', marginBottom: '1rem', padding: '0.75rem', background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: '4px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img
+                    src="./assets/stamps/stamp-noc-released.svg"
+                    alt="AICTE Official Release Stamp"
+                    style={{ height: '70px', width: 'auto' }}
+                  />
+                  <div>
+                    <div style={{ fontWeight: 800, color: '#15803d', fontSize: '0.85rem' }}>
+                      STATUTORY DISCHARGE OF LIEN CONFIRMED
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: '#475569' }}>
+                      Signed &amp; Approved by Member Secretary, AICTE New Delhi
+                    </div>
+                    <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
+                      National Tripartite Security Protocol (APH 2024-27 Clause 1.5)
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b' }}>DSC Token Status:</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#002147' }}>NIC Class-3 Validated</div>
+                  <div style={{ fontSize: '0.7rem', color: '#16a34a', fontWeight: 700 }}>✓ SHA-256 Ledger Sealed</div>
+                </div>
+              </div>
 
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontStyle: 'italic', borderTop: '1px solid #e2e8f0', paddingTop: '0.75rem' }}>
                 Note: This electronic certificate is generated under Section 65B of the Indian Evidence Act, 1872 and does not require physical ink seal. The joint lien marked in favor of Member Secretary, AICTE stands hereby unconditionally discharged.

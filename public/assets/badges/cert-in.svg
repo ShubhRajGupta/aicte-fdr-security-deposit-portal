@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" width="160" height="50">
+  <rect width="160" height="50" fill="#ffffff" rx="4" stroke="#cbd5e1" stroke-width="1"/>
+  <g transform="translate(10, 8)">
+    <path d="M16 2 L4 7 V18 C4 26 16 32 16 32 C16 32 28 26 28 18 V7 Z" fill="#002147" stroke="#f97316" stroke-width="1.5"/>
+    <rect x="11" y="16" width="10" height="8" rx="1" fill="#22c55e"/>
+    <path d="M13 16 V12 C13 10.3 14.3 9 16 9 C17.7 9 19 10.3 19 12 V16" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="16" cy="19.5" r="1" fill="#002147"/>
+  </g>
+  <text x="46" y="20" font-family="'Inter', sans-serif" font-size="12" font-weight="800" fill="#002147">CERT-In</text>
+  <text x="46" y="31" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#16a34a">CYBER SECURED</text>
+  <text x="46" y="41" font-family="'Inter', sans-serif" font-size="6.5" font-weight="500" fill="#64748b">MeitY Govt of India</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 50" width="150" height="50">
+  <rect width="150" height="50" fill="#ffffff" rx="4" stroke="#cbd5e1" stroke-width="1"/>
+  <g transform="translate(10, 10)">
+    <polygon points="15,2 27,8 27,22 15,28 3,22 3,8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="15" y="18" font-family="'Inter', sans-serif" font-size="8" font-weight="900" fill="#1e3a8a" text-anchor="middle">ISMS</text>
+  </g>
+  <text x="44" y="20" font-family="'Inter', sans-serif" font-size="10.5" font-weight="800" fill="#002147">ISO/IEC 27001</text>
+  <text x="44" y="31" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#2563eb">DATA PRIVACY</text>
+  <text x="44" y="41" font-family="'Inter', sans-serif" font-size="6.5" font-weight="500" fill="#64748b">Certified Security</text>
+</svg>

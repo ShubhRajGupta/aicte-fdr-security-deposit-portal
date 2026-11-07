@@ -5,6 +5,7 @@ import { evaluateDiscrepancyRules } from '../../services/rulesEngine';
 import { computeSha256 } from '../../services/auditService';
 import { generateQrCodeDataUrl } from '../../services/qrService';
 import { Instrument, Discrepancy } from '../../types';
+import { BankLogo } from '../common/BankLogo';
 import {
   FilePlus,
   CheckCircle,
@@ -221,8 +222,11 @@ export const SubmissionWizard: React.FC = () => {
 
             <div style={{ background: '#f8fafc', padding: '8px 10px', border: '1px solid #e2e8f0' }}>
               <span style={{ color: '#64748b', fontSize: '10px', display: 'block' }}>ISSUING BANK &amp; BRANCH</span>
-              <div style={{ fontWeight: 700, color: '#1e293b' }}>{acknowledgedInstrument.bankName}</div>
-              <div style={{ fontSize: '10px', color: '#64748b' }}>IFSC: {acknowledgedInstrument.ifscCode} · {acknowledgedInstrument.branchName}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '3px' }}>
+                <BankLogo bankName={acknowledgedInstrument.bankName} size="sm" />
+                <div style={{ fontWeight: 700, color: '#1e293b' }}>{acknowledgedInstrument.bankName}</div>
+              </div>
+              <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>IFSC: {acknowledgedInstrument.ifscCode} · {acknowledgedInstrument.branchName}</div>
             </div>
 
             <div style={{ background: '#f8fafc', padding: '8px 10px', border: '1px solid #e2e8f0' }}>
@@ -445,7 +449,10 @@ export const SubmissionWizard: React.FC = () => {
 
               <div className="gov-form-group">
                 <label className="gov-label">Resolved Branch Name:</label>
-                <input type="text" value={`${bankName} — ${branchName}`} disabled className="gov-input" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <BankLogo bankName={bankName} size="sm" />
+                  <input type="text" value={`${bankName} — ${branchName}`} disabled className="gov-input" style={{ flex: 1 }} />
+                </div>
               </div>
             </div>
 
@@ -625,7 +632,13 @@ export const SubmissionWizard: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', fontSize: '11px', background: '#f8fafc', padding: '12px', border: '1px solid #cbd5e1', marginBottom: '14px' }}>
               <div><span style={{ color: '#64748b' }}>Institution Name:</span> <strong style={{ color: '#002147' }}>{activePersona.institutionName || 'Apex Institute'}</strong></div>
               <div><span style={{ color: '#64748b' }}>Instrument Number:</span> <strong style={{ color: '#002147', fontFamily: 'var(--font-mono)' }}>{instrumentNumber}</strong></div>
-              <div><span style={{ color: '#64748b' }}>Issuing Bank &amp; IFSC:</span> <div>{bankName} ({ifscCode})</div></div>
+              <div>
+                <span style={{ color: '#64748b' }}>Issuing Bank &amp; IFSC:</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                  <BankLogo bankName={bankName} size="sm" />
+                  <strong style={{ color: '#002147' }}>{bankName}</strong> ({ifscCode})
+                </div>
+              </div>
               <div><span style={{ color: '#64748b' }}>Principal Amount:</span> <strong style={{ color: '#15803d', fontSize: '13px' }}>₹{amount.toLocaleString('en-IN')}.00</strong></div>
               <div><span style={{ color: '#64748b' }}>Maturity Date:</span> <div style={{ fontFamily: 'var(--font-mono)' }}>{maturityDate}</div></div>
               <div><span style={{ color: '#64748b' }}>Initial Trust Level:</span> <strong style={{ color: previewDiscrepancies.length > 0 ? '#b91c1c' : '#475569' }}>{previewDiscrepancies.length > 0 ? 'L-X (Disputed Flag)' : 'L0 (Submitted Unverified)'}</strong></div>

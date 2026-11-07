@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { TrustBadge } from '../common/TrustBadge';
+import { BankLogo } from '../common/BankLogo';
 import {
   Landmark,
   ShieldCheck,
@@ -108,8 +109,16 @@ export const BankConfirmationPortal: React.FC = () => {
                   <td><strong style={{ color: 'var(--gov-green-dark)', fontSize: '0.95rem' }}>{instrument.formattedAmount}</strong></td>
                 </tr>
                 <tr>
-                  <td style={{ fontWeight: 700, background: '#f8fafc', color: 'var(--gov-navy-dark)' }}>Issuing Bank & Branch:</td>
-                  <td>{instrument.bankName} ({instrument.branchName})</td>
+                  <td style={{ fontWeight: 700, background: '#f8fafc', color: 'var(--gov-navy-dark)' }}>Issuing Bank &amp; Branch:</td>
+                  <td>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <BankLogo bankName={instrument.bankName} size="sm" />
+                      <div>
+                        <strong>{instrument.bankName}</strong>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{instrument.branchName} · IFSC: {instrument.ifscCode}</div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td style={{ fontWeight: 700, background: '#f8fafc', color: 'var(--gov-navy-dark)' }}>Maturity Date:</td>
@@ -222,6 +231,30 @@ export const BankConfirmationPortal: React.FC = () => {
                 <label htmlFor="lien-attest" style={{ cursor: 'pointer', lineHeight: 1.4 }}>
                   <strong>Statutory Declaration:</strong> I hereby certify that FDR #{instrument.instrumentNumber} of principal sum <strong>{instrument.formattedAmount}</strong> is held in safe custody at this branch, duly lien-marked in favor of <strong>Member Secretary, AICTE</strong>. This deposit will not be released or encashed without a digitally verifiable AICTE Release NOC.
                 </label>
+              </div>
+
+              {/* Visual Stamp Preview */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  background: '#eff6ff',
+                  border: '1px solid #bfdbfe',
+                  borderRadius: '3px',
+                  padding: '8px 12px',
+                  marginBottom: '1rem'
+                }}
+              >
+                <img
+                  src="./assets/stamps/stamp-bank-confirmed.svg"
+                  alt="Bank CBS Attestation Stamp"
+                  style={{ height: '55px', width: 'auto' }}
+                />
+                <div style={{ fontSize: '0.75rem', color: '#1e3a8a', lineHeight: 1.3 }}>
+                  <div style={{ fontWeight: 800 }}>Direct CBS Attestation Preview</div>
+                  <div>Upon sign-off, official CBS lien mark is registered into AICTE SHA-256 Ledger (Level L2).</div>
+                </div>
               </div>
 
               <button
