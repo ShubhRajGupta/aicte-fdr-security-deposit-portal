@@ -43,7 +43,7 @@ export const ExecutiveHeroBanner: React.FC = () => {
   const slides: BannerSlide[] = [
     {
       id: 'slide-parliament',
-      image: './assets/indian-parliament.jpg',
+      image: './assets/indian-parliament.webp',
       tag: 'Viksit Bharat @ 2047 · Ministry of Education · Government of India',
       title: 'National Central Security Deposit & Joint FDR Registry (e-FDR)',
       subtitle:
@@ -65,7 +65,7 @@ export const ExecutiveHeroBanner: React.FC = () => {
     },
     {
       id: 'slide-rashtrapati',
-      image: './assets/rashtrapati-bhavan.jpg',
+      image: './assets/rashtrapati-bhavan.webp',
       tag: 'Sovereign Banking Integration · RBI Scheduled Commercial Bank Network',
       title: 'Direct Scheduled Commercial Bank Attestation Channel',
       subtitle:
@@ -87,7 +87,7 @@ export const ExecutiveHeroBanner: React.FC = () => {
     },
     {
       id: 'slide-indiagate',
-      image: './assets/india-gate.jpg',
+      image: './assets/india-gate.webp',
       tag: 'Central Vigilance Bureau · Fraud Prevention & Digital Trust',
       title: 'Tamper-Evident Digital QR-NOC Release Protocol',
       subtitle:
@@ -109,7 +109,7 @@ export const ExecutiveHeroBanner: React.FC = () => {
     },
     {
       id: 'slide-governance',
-      image: './assets/indian-parliament.jpg',
+      image: './assets/digital-india-cyber.webp',
       tag: 'Regulatory Sandbox · Deterministic Rule Engine (R1–R10)',
       title: 'Zero-Trust Cryptographic Ledger & Deterministic Scrutiny',
       subtitle:

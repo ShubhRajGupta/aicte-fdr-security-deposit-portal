@@ -903,9 +903,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
 
             <div style={{ padding: '1.25rem' }}>
               <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                <Smartphone size={32} style={{ color: 'var(--gov-navy-medium)', margin: '0 auto 0.5rem' }} />
+                <img
+                  src="./assets/ui/two-factor-shield.svg"
+                  alt="2FA Shield"
+                  style={{ width: '44px', height: '44px', margin: '0 auto 0.4rem', display: 'block' }}
+                />
                 <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--gov-navy-dark)', margin: 0 }}>
-                  Enter Verification Code
+                  Statutory Two-Factor Challenge (2FA OTP)
                 </h4>
                 <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px' }}>
                   A 6-digit statutory OTP has been dispatched to {pendingUser?.phone || '+91 98*** ***90'}.

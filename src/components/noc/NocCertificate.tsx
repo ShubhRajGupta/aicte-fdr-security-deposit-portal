@@ -86,7 +86,9 @@ export const NocCertificate: React.FC<NocCertificateProps> = ({ nocCode }) => {
       {/* Official Government NOC Certificate Form */}
       <div
         style={{
-          background: '#ffffff',
+          background: '#ffffff url("./assets/stamps/guilloche-pattern.svg")',
+          backgroundSize: '280px 280px',
+          backgroundRepeat: 'repeat',
           color: '#0f172a',
           padding: '3rem 2.5rem',
           borderRadius: '8px',
@@ -231,18 +233,18 @@ export const NocCertificate: React.FC<NocCertificateProps> = ({ nocCode }) => {
           )}
         </div>
 
-        {/* Footer: Live QR Code & Digital Signature */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '2px solid #1e3a8a', paddingTop: '1.25rem' }}>
+        {/* Footer: Live QR Code, Statutory Stamps & Digital Signature */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '2px solid #1e3a8a', paddingTop: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
           {/* Live Scannable QR Code */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             {qrDataUrl ? (
               <img
                 src={qrDataUrl}
                 alt="AICTE Official QR Verification Code"
-                style={{ width: '110px', height: '110px', border: '1px solid #cbd5e1', padding: '2px' }}
+                style={{ width: '105px', height: '105px', border: '1px solid #cbd5e1', padding: '2px', background: '#ffffff' }}
               />
             ) : (
-              <div style={{ width: '110px', height: '110px', background: '#f1f5f9' }} />
+              <div style={{ width: '105px', height: '105px', background: '#f1f5f9' }} />
             )}
             <div>
               <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#1e3a8a' }}>
@@ -273,6 +275,20 @@ export const NocCertificate: React.FC<NocCertificateProps> = ({ nocCode }) => {
                 Click to open verification view →
               </button>
             </div>
+          </div>
+
+          {/* Official AICTE Gold Seal & NOC Release Stamp */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img
+              src="./assets/stamps/aicte-gold-seal.svg"
+              alt="AICTE Statutory Gold Seal"
+              style={{ height: '72px', width: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}
+            />
+            <img
+              src="./assets/stamps/stamp-noc-released.svg"
+              alt="AICTE NOC Released Stamp"
+              style={{ height: '72px', width: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.12))' }}
+            />
           </div>
 
           {/* Digital Signature Stamp */}

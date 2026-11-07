@@ -66,10 +66,12 @@ template_integrity.json
 template_map.json
 ppt_docs/
 report/
+public/aicte_government_portal_assets/
 
 # Binary document exclusion (allow canonical files in docs/presentation and docs/report)
 *.docx
 *.pptx
+*.zip
 !docs/presentation/*.pptx
 !docs/presentation/*.pdf
 !docs/report/*.pdf

@@ -47,6 +47,7 @@ export const CaseWorkspace: React.FC = () => {
   const [activeDocIndex, setActiveDocIndex] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(100);
   const [showOcrOverlay, setShowOcrOverlay] = useState(false);
+  const [docViewMode, setDocViewMode] = useState<'specimen' | 'digital'>('specimen');
   const [asOfYear, setAsOfYear] = useState<number>(2026);
 
   // Modals / forms
@@ -188,26 +189,63 @@ export const CaseWorkspace: React.FC = () => {
             </div>
           </div>
 
-          {/* Document Attachment Tabs */}
-          <div style={{ display: 'flex', gap: '4px', padding: '6px 12px', borderBottom: '1px solid #e2e8f0', background: '#f8fafc', overflowX: 'auto' }}>
-            {instrument.documents.map((doc, idx) => (
+          {/* Document Attachment Tabs & Specimen View Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 12px', borderBottom: '1px solid #e2e8f0', background: '#f8fafc', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ display: 'flex', gap: '4px', overflowX: 'auto' }}>
+              {instrument.documents.map((doc, idx) => (
+                <button
+                  key={doc.id}
+                  onClick={() => setActiveDocIndex(idx)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: '2px',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    background: activeDocIndex === idx ? '#003366' : '#ffffff',
+                    color: activeDocIndex === idx ? '#ffffff' : '#475569',
+                    border: activeDocIndex === idx ? '1px solid #002244' : '1px solid #cbd5e1',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {doc.documentType.replace('_', ' ')}
+                </button>
+              ))}
+            </div>
+
+            {/* Specimen vs Digital Twin Toggle */}
+            <div style={{ display: 'inline-flex', borderRadius: '3px', overflow: 'hidden', border: '1px solid #cbd5e1' }}>
               <button
-                key={doc.id}
-                onClick={() => setActiveDocIndex(idx)}
+                type="button"
+                onClick={() => setDocViewMode('specimen')}
                 style={{
-                  padding: '3px 8px',
-                  borderRadius: '2px',
+                  padding: '3px 9px',
                   fontSize: '11px',
-                  fontWeight: 600,
-                  background: activeDocIndex === idx ? '#003366' : '#ffffff',
-                  color: activeDocIndex === idx ? '#ffffff' : '#475569',
-                  border: activeDocIndex === idx ? '1px solid #002244' : '1px solid #cbd5e1',
+                  fontWeight: 700,
+                  background: docViewMode === 'specimen' ? '#002147' : '#ffffff',
+                  color: docViewMode === 'specimen' ? '#ffffff' : '#475569',
+                  border: 'none',
                   cursor: 'pointer'
                 }}
               >
-                {doc.documentType.replace('_', ' ')}
+                📄 Scanned Specimen
               </button>
-            ))}
+              <button
+                type="button"
+                onClick={() => setDocViewMode('digital')}
+                style={{
+                  padding: '3px 9px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  background: docViewMode === 'digital' ? '#002147' : '#ffffff',
+                  color: docViewMode === 'digital' ? '#ffffff' : '#475569',
+                  border: 'none',
+                  borderLeft: '1px solid #cbd5e1',
+                  cursor: 'pointer'
+                }}
+              >
+                🗂️ Digital Twin
+              </button>
+            </div>
           </div>
 
           {/* Rendered FDR Certificate Preview Canvas */}
@@ -224,113 +262,229 @@ export const CaseWorkspace: React.FC = () => {
               overflow: 'hidden'
             }}
           >
-            {/* The Authentic Bank Fixed Deposit Receipt Document */}
-            <div
-              style={{
-                width: '100%',
-                maxWidth: '540px',
-                background: '#ffffff',
-                color: '#1e293b',
-                padding: '24px 20px',
-                borderRadius: '2px',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-                border: '2px solid #b45309',
-                transform: `scale(${zoomLevel / 100})`,
-                transformOrigin: 'top center',
-                transition: 'transform 0.1s ease',
-                position: 'relative'
-              }}
-            >
-              {/* Bank Header with Authentic Bank Logo */}
-              <div style={{ textAlign: 'center', borderBottom: '2px solid #002147', paddingBottom: '10px', marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                  <BankLogo bankName={instrument.bankName} size="lg" />
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '15px', fontWeight: 900, color: '#002147', letterSpacing: '0.04em' }}>
-                      {instrument.bankName.toUpperCase()}
-                    </div>
-                    <div style={{ fontSize: '10px', color: '#475569' }}>
-                      {instrument.branchName} · IFSC: <strong>{instrument.ifscCode}</strong>
-                    </div>
-                  </div>
-                </div>
-                <div style={{ fontSize: '11px', fontWeight: 800, color: '#b45309', marginTop: '4px', letterSpacing: '0.04em' }}>
-                  TERM / FIXED DEPOSIT RECEIPT (SPECIAL DEPOSIT ADVICE)
-                </div>
-              </div>
-
-              {/* Document Key Attributes */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px', fontSize: '11px', marginBottom: '12px' }}>
-                <div>
-                  <span style={{ color: '#64748b' }}>Certificate / FDR No:</span>
-                  <div style={{ fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#002147' }}>{instrument.instrumentNumber}</div>
-                </div>
-                <div>
-                  <span style={{ color: '#64748b' }}>Date of Issue:</span>
-                  <div style={{ fontWeight: 700 }}>{instrument.issueDate}</div>
-                </div>
-                <div>
-                  <span style={{ color: '#64748b' }}>Principal Deposit:</span>
-                  <div style={{ fontWeight: 900, color: '#15803d', fontSize: '13px' }}>{instrument.formattedAmount}</div>
-                </div>
-                <div>
-                  <span style={{ color: '#64748b' }}>Maturity Date:</span>
-                  <div style={{ fontWeight: 700, color: '#b91c1c' }}>{instrument.maturityDate}</div>
-                </div>
-                <div style={{ gridColumn: 'span 2' }}>
-                  <span style={{ color: '#64748b' }}>Depositor Name:</span>
-                  <div style={{ fontWeight: 700 }}>{instrument.depositorName}</div>
-                </div>
-              </div>
-
-              {/* Official AICTE Red Lien Stamp & CBS Bank Verification Stamps */}
+            {docViewMode === 'specimen' ? (
+              /* Authentic Scanned Physical Instrument Specimen */
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '12px',
-                  margin: '12px 0',
-                  flexWrap: 'wrap'
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '540px',
+                  background: '#ffffff',
+                  borderRadius: '3px',
+                  boxShadow: '0 4px 18px rgba(0, 0, 0, 0.22)',
+                  border: '1px solid #cbd5e1',
+                  overflow: 'hidden',
+                  transform: `scale(${zoomLevel / 100})`,
+                  transformOrigin: 'top center',
+                  transition: 'transform 0.1s ease'
                 }}
               >
                 <img
-                  src="./assets/stamps/stamp-lien-verified.svg"
-                  alt="AICTE Statutory Lien Verified"
-                  style={{ height: '70px', width: 'auto' }}
+                  src={
+                    instrument.instrumentType === 'BANK_GUARANTEE' || instrument.instrumentNumber.includes('BG')
+                      ? './assets/specimens/bank-guarantee-pnb-sample.webp'
+                      : './assets/specimens/fdr-sbi-sample.webp'
+                  }
+                  alt="Scanned Security Instrument Specimen"
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
                 />
-                {instrument.trustLevel === 'L2' && (
+
+                {/* Overlaid Official AICTE Red Lien Stamp & CBS Bank Verification Stamps */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '16px',
+                    right: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    pointerEvents: 'none'
+                  }}
+                >
                   <img
-                    src="./assets/stamps/stamp-bank-confirmed.svg"
-                    alt="Scheduled Bank CBS Confirmed"
-                    style={{ height: '65px', width: 'auto' }}
+                    src="./assets/stamps/stamp-lien-verified.svg"
+                    alt="AICTE Statutory Lien Verified"
+                    style={{ height: '64px', width: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}
                   />
+                  {instrument.trustLevel === 'L2' && (
+                    <img
+                      src="./assets/stamps/stamp-bank-confirmed.svg"
+                      alt="Bank CBS Confirmed"
+                      style={{ height: '60px', width: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}
+                    />
+                  )}
+                  {['NOC_ISSUED', 'RELEASED'].includes(instrument.status) && (
+                    <img
+                      src="./assets/stamps/stamp-noc-released.svg"
+                      alt="AICTE NOC Released"
+                      style={{ height: '64px', width: 'auto', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}
+                    />
+                  )}
+                </div>
+
+                {/* Dynamic OCR Bounding Boxes */}
+                {showOcrOverlay && (
+                  <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '28%',
+                        left: '6%',
+                        width: '46%',
+                        height: '11%',
+                        border: '2px solid #22c55e',
+                        background: 'rgba(34, 197, 94, 0.15)',
+                        borderRadius: '2px'
+                      }}
+                    >
+                      <span style={{ position: 'absolute', top: '-15px', left: 0, background: '#15803d', color: '#fff', fontSize: '8px', fontWeight: 800, padding: '1px 4px', borderRadius: '2px', whiteSpace: 'nowrap' }}>
+                        OCR 99.8%: FDR #{instrument.instrumentNumber}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '44%',
+                        left: '6%',
+                        width: '56%',
+                        height: '11%',
+                        border: '2px solid #22c55e',
+                        background: 'rgba(34, 197, 94, 0.15)',
+                        borderRadius: '2px'
+                      }}
+                    >
+                      <span style={{ position: 'absolute', top: '-15px', left: 0, background: '#15803d', color: '#fff', fontSize: '8px', fontWeight: 800, padding: '1px 4px', borderRadius: '2px', whiteSpace: 'nowrap' }}>
+                        OCR 100%: Joint Lien Member Secretary AICTE
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '60%',
+                        left: '6%',
+                        width: '42%',
+                        height: '11%',
+                        border: '2px solid #22c55e',
+                        background: 'rgba(34, 197, 94, 0.15)',
+                        borderRadius: '2px'
+                      }}
+                    >
+                      <span style={{ position: 'absolute', top: '-15px', left: 0, background: '#15803d', color: '#fff', fontSize: '8px', fontWeight: 800, padding: '1px 4px', borderRadius: '2px', whiteSpace: 'nowrap' }}>
+                        OCR 100%: Principal {instrument.formattedAmount}
+                      </span>
+                    </div>
+                  </div>
                 )}
-                {['NOC_ISSUED', 'RELEASED'].includes(instrument.status) && (
+              </div>
+            ) : (
+              /* The Structured Digital Twin Document */
+              <div
+                style={{
+                  width: '100%',
+                  maxWidth: '540px',
+                  background: '#ffffff',
+                  color: '#1e293b',
+                  padding: '24px 20px',
+                  borderRadius: '2px',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                  border: '2px solid #b45309',
+                  transform: `scale(${zoomLevel / 100})`,
+                  transformOrigin: 'top center',
+                  transition: 'transform 0.1s ease',
+                  position: 'relative'
+                }}
+              >
+                {/* Bank Header with Authentic Bank Logo */}
+                <div style={{ textAlign: 'center', borderBottom: '2px solid #002147', paddingBottom: '10px', marginBottom: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                    <BankLogo bankName={instrument.bankName} size="lg" />
+                    <div style={{ textAlign: 'left' }}>
+                      <div style={{ fontSize: '15px', fontWeight: 900, color: '#002147', letterSpacing: '0.04em' }}>
+                        {instrument.bankName.toUpperCase()}
+                      </div>
+                      <div style={{ fontSize: '10px', color: '#475569' }}>
+                        {instrument.branchName} · IFSC: <strong>{instrument.ifscCode}</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '11px', fontWeight: 800, color: '#b45309', marginTop: '4px', letterSpacing: '0.04em' }}>
+                    TERM / FIXED DEPOSIT RECEIPT (SPECIAL DEPOSIT ADVICE)
+                  </div>
+                </div>
+
+                {/* Document Key Attributes */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px', fontSize: '11px', marginBottom: '12px' }}>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Certificate / FDR No:</span>
+                    <div style={{ fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#002147' }}>{instrument.instrumentNumber}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Date of Issue:</span>
+                    <div style={{ fontWeight: 700 }}>{instrument.issueDate}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Principal Deposit:</span>
+                    <div style={{ fontWeight: 900, color: '#15803d', fontSize: '13px' }}>{instrument.formattedAmount}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: '#64748b' }}>Maturity Date:</span>
+                    <div style={{ fontWeight: 700, color: '#b91c1c' }}>{instrument.maturityDate}</div>
+                  </div>
+                  <div style={{ gridColumn: 'span 2' }}>
+                    <span style={{ color: '#64748b' }}>Depositor Name:</span>
+                    <div style={{ fontWeight: 700 }}>{instrument.depositorName}</div>
+                  </div>
+                </div>
+
+                {/* Official AICTE Red Lien Stamp & CBS Bank Verification Stamps */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '12px',
+                    margin: '12px 0',
+                    flexWrap: 'wrap'
+                  }}
+                >
                   <img
-                    src="./assets/stamps/stamp-noc-released.svg"
-                    alt="AICTE NOC Released"
+                    src="./assets/stamps/stamp-lien-verified.svg"
+                    alt="AICTE Statutory Lien Verified"
                     style={{ height: '70px', width: 'auto' }}
                   />
-                )}
-              </div>
+                  {instrument.trustLevel === 'L2' && (
+                    <img
+                      src="./assets/stamps/stamp-bank-confirmed.svg"
+                      alt="Scheduled Bank CBS Confirmed"
+                      style={{ height: '65px', width: 'auto' }}
+                    />
+                  )}
+                  {['NOC_ISSUED', 'RELEASED'].includes(instrument.status) && (
+                    <img
+                      src="./assets/stamps/stamp-noc-released.svg"
+                      alt="AICTE NOC Released"
+                      style={{ height: '70px', width: 'auto' }}
+                    />
+                  )}
+                </div>
 
-              {/* Signatures */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '16px', paddingTop: '8px', borderTop: '1px solid #cbd5e1' }}>
-                <div>
-                  <div style={{ width: '80px', height: '24px', border: '1px solid #cbd5e1', borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px', color: '#15803d', fontWeight: 800 }}>
-                    VERIFIED
+                {/* Signatures */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '16px', paddingTop: '8px', borderTop: '1px solid #cbd5e1' }}>
+                  <div>
+                    <div style={{ width: '80px', height: '24px', border: '1px solid #cbd5e1', borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px', color: '#15803d', fontWeight: 800 }}>
+                      VERIFIED
+                    </div>
+                    <div style={{ fontSize: '9px', color: '#64748b', marginTop: '2px' }}>BRANCH AUDITED</div>
                   </div>
-                  <div style={{ fontSize: '9px', color: '#64748b', marginTop: '2px' }}>BRANCH AUDITED</div>
-                </div>
 
-                <div style={{ textAlign: 'right', fontSize: '10px', color: '#475569' }}>
-                  <div style={{ fontWeight: 700, color: '#002147' }}>Alok Verma</div>
-                  <div>For {instrument.bankName}</div>
-                  <div>Authorized Branch Signatory</div>
+                  <div style={{ textAlign: 'right', fontSize: '10px', color: '#475569' }}>
+                    <div style={{ fontWeight: 700, color: '#002147' }}>Alok Verma</div>
+                    <div>For {instrument.bankName}</div>
+                    <div>Authorized Branch Signatory</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Optional OCR Text Assist Overlay */}
             {showOcrOverlay && (

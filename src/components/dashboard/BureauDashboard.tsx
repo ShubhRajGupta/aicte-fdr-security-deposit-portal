@@ -89,9 +89,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #002147', background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#475569', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>TOTAL DEPOSITS</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e0e7ff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <IndianRupee size={12} style={{ color: '#002147' }} />
-            </div>
+            <img src="./assets/icons/total-deposits.svg" alt="Total Deposits" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#002147', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             ₹{(totalValue / 10000000).toFixed(2)} Cr
@@ -106,9 +104,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #15803d', background: 'linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#166534', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>ACTIVE COMPLIANT</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <CheckCircle size={12} style={{ color: '#15803d' }} />
-            </div>
+            <img src="./assets/icons/active-coverage.svg" alt="Active Compliant" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#15803d', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {activeCount}
@@ -123,9 +119,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #b45309', background: 'linear-gradient(180deg, #ffffff 0%, #fffbeb 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#92400e', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>EXPIRING (&lt;90D)</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Clock size={12} style={{ color: '#b45309' }} />
-            </div>
+            <img src="./assets/icons/expiring-90d.svg" alt="Expiring T-90" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#b45309', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {expiringCount}
@@ -140,9 +134,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #b91c1c', background: 'linear-gradient(180deg, #ffffff 0%, #fef2f2 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#991b1b', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>OVERDUE / LAPSED</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <AlertOctagon size={12} style={{ color: '#b91c1c' }} />
-            </div>
+            <img src="./assets/icons/overdue.svg" alt="Overdue Lapsed" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#b91c1c', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {overdueCount}
@@ -157,9 +149,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #475569', background: 'linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#475569', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>UNDER SCRUTINY</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <FileText size={12} style={{ color: '#475569' }} />
-            </div>
+            <img src="./assets/icons/under-scrutiny.svg" alt="Under Scrutiny" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#1e293b', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {scrutinyCount}
@@ -174,9 +164,7 @@ export const BureauDashboard: React.FC = () => {
         <div className="gov-panel" style={{ padding: '10px 12px', margin: 0, borderRadius: '3px', borderTop: '3px solid #0369a1', background: 'linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ color: '#0369a1', fontSize: '9.5px', fontWeight: 800, letterSpacing: '0.04em' }}>NOC ISSUED</span>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: '#e0f2fe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Award size={12} style={{ color: '#0369a1' }} />
-            </div>
+            <img src="./assets/icons/noc-issued.svg" alt="NOC Issued" style={{ width: '24px', height: '24px' }} />
           </div>
           <div style={{ fontSize: '18px', fontWeight: 900, color: '#0369a1', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
             {releasedCount}
