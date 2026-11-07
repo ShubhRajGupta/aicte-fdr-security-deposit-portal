@@ -113,7 +113,7 @@ const DEFAULT_USERS = [
     username: 'membersecretary@aicte-india.gov.in',
     email: 'membersecretary@aicte-india.gov.in',
     password: 'MemberSecretary@2026!',
-    name: 'Prof. T. G. Sitharam',
+    name: 'Member Secretary / Adviser-I',
     role: 'COMPETENT_AUTHORITY',
     title: 'Member Secretary & Appellate Authority',
     department: 'Apex Executive Council, AICTE HQ',
@@ -681,7 +681,7 @@ app.post('/api/instruments/:id/approve-release', (req, res) => {
   instrument.nocRecord = {
     nocNumber: `AICTE/NOC/2026/${Math.floor(10000 + Math.random() * 90000)}`,
     issuedAt: new Date().toISOString(),
-    issuedBy: authorityName || 'Prof. T. G. Sitharam',
+    issuedBy: authorityName || 'Member Secretary / Adviser-I',
     authorityDesignation: 'Member Secretary, AICTE New Delhi',
     verificationCode: nocCode,
     qrPayloadUrl: `https://facilities.aicte-india.org/verify-noc?code=${nocCode}`,

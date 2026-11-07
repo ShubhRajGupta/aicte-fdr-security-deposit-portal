@@ -94,7 +94,7 @@
       "username": "member.secretary@aicte-india.org",
       "email": "member.secretary@aicte-india.org",
       "password": "Aicte@Password2026",
-      "name": "Prof. T. G. Sitharam / Member Secretary",
+      "name": "Member Secretary / Adviser-I",
       "role": "COMPETENT_AUTHORITY",
       "title": "Member Secretary, AICTE New Delhi",
       "department": "Executive Council, AICTE HQ",
@@ -406,7 +406,7 @@
       "nocRecord": {
         "nocNumber": "AICTE/NOC/2026/08942",
         "issuedAt": "2026-02-16T15:30:00Z",
-        "issuedBy": "Prof. T. G. Sitharam",
+        "issuedBy": "Member Secretary / Adviser-I",
         "authorityDesignation": "Member Secretary, AICTE New Delhi",
         "verificationCode": "NOC-26265-8942-APEX",
         "qrPayloadUrl": "https://facilities.aicte-india.org/verify-noc?code=NOC-26265-8942-APEX",

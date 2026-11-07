@@ -96,9 +96,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [personas] = useState<UserPersona[]>(SEED_PERSONAS);
   
   // Auth state: Default to true in Demo Evaluation mode so evaluators immediately explore the portal
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('aicte_explicit_logout') !== 'true';
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   const [activePersona, setActivePersona] = useState<UserPersona>(() => {
     const savedUser = localStorage.getItem('aicte_active_user');

@@ -29,12 +29,9 @@ export const Header: React.FC = () => {
     notifications,
     language,
     setLanguage,
-    logout,
-    sessionRemainingSeconds,
     setActiveTab
   } = useApp();
 
-  const [showPersonaMenu, setShowPersonaMenu] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
   const [fontSizeScale, setFontSizeScale] = useState<'sm' | 'md' | 'lg'>('md');
 
@@ -270,150 +267,23 @@ export const Header: React.FC = () => {
             )}
           </div>
 
-          {/* User Persona & Sovereign Profile Card */}
-          <div style={{ position: 'relative' }}>
-            <div
-              onClick={() => setShowPersonaMenu(!showPersonaMenu)}
-              className="gov-user-card"
-              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 10px', background: '#ffffff', border: '1px solid #cbd5e1' }}
-              title="Click to View Official Profile and Account Details"
-            >
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontWeight: 800, color: '#002147', fontSize: '12px' }}>
-                  {activePersona.name}
-                </div>
-                <div style={{ fontSize: '10px', color: '#64748b', fontWeight: 500 }}>
-                  {activePersona.title} ({activePersona.department || activePersona.institutionName || 'HQ'})
-                </div>
-              </div>
-              <ChevronDown size={14} style={{ color: '#003366' }} />
-            </div>
-
-            {/* Sovereign Government Profile Dropdown */}
-            {showPersonaMenu && (
-              <div
-                className="gov-panel"
-                style={{
-                  position: 'absolute',
-                  top: '115%',
-                  right: 0,
-                  width: '320px',
-                  zIndex: 2000,
-                  boxShadow: '0 8px 24px rgba(0,33,71,0.2)',
-                  border: '1px solid #002147',
-                  background: '#ffffff'
-                }}
-              >
-                {/* Header Strip */}
-                <div style={{ background: '#002147', color: '#ffffff', padding: '10px 12px' }}>
-                  <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#ff9933', fontWeight: 800 }}>
-                    Government of India • Ministry of Education
-                  </div>
-                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>
-                    {activePersona.name}
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#cbd5e1' }}>
-                    {activePersona.title}
-                  </div>
-                </div>
-
-                {/* Details Body */}
-                <div style={{ padding: '12px' }}>
-                  <div style={{ fontSize: '11px', color: '#334155', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
-                      <span style={{ color: '#64748b' }}>Designation:</span>
-                      <strong style={{ color: '#0f172a' }}>{activePersona.title}</strong>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
-                      <span style={{ color: '#64748b' }}>Station / Office:</span>
-                      <strong style={{ color: '#0f172a' }}>{activePersona.department || activePersona.institutionName || 'Council HQ, New Delhi'}</strong>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
-                      <span style={{ color: '#64748b' }}>Portal Tier:</span>
-                      <span style={{ background: '#e0f2fe', color: '#0369a1', fontWeight: 700, padding: '1px 6px', fontSize: '10px', borderRadius: '2px' }}>
-                        {activePersona.role}
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9', paddingBottom: '6px' }}>
-                      <span style={{ color: '#64748b' }}>Digital Identity:</span>
-                      <span style={{ color: '#15803d', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#16a34a' }}></span>
-                        NIC Class-3 DSC Active
-                      </span>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '6px' }}>
-                      <span style={{ color: '#64748b' }}>Statutory Authority:</span>
-                      <span style={{ color: '#002147', fontWeight: 600 }}>APH 2024-27 Cl. 1.4</span>
-                    </div>
-                  </div>
-
-                  <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid #e2e8f0' }}>
-                    <button
-                      onClick={() => {
-                        setShowPersonaMenu(false);
-                        logout();
-                      }}
-                      className="btn-gov btn-gov-secondary btn-gov-sm"
-                      style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        color: '#b91c1c',
-                        background: '#fef2f2',
-                        border: '1px solid #fecaca',
-                        fontWeight: 700,
-                        padding: '6px 12px'
-                      }}
-                      title="End current authenticated session and return to access gateway"
-                    >
-                      <LogOut size={13} />
-                      <span>Sign Out / Secure Logout</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Sign Out & Session Security Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div
-              style={{
-                fontSize: '10px',
-                color: sessionRemainingSeconds < 300 ? '#b91c1c' : '#64748b',
-                background: sessionRemainingSeconds < 300 ? '#fee2e2' : '#f8fafc',
-                border: '1px solid #cbd5e1',
-                padding: '4px 8px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontWeight: 600
-              }}
-              title="Session idle security timeout (GSD Plan 1.2)"
-            >
-              <Clock size={11} style={{ color: sessionRemainingSeconds < 300 ? '#dc2626' : '#d97706' }} />
-              <span>{Math.floor(sessionRemainingSeconds / 60)}:{(sessionRemainingSeconds % 60).toString().padStart(2, '0')}</span>
-            </div>
-
-            <button
-              onClick={logout}
-              className="btn-gov btn-gov-secondary btn-gov-sm"
-              style={{
-                border: '1px solid #fecaca',
-                background: '#fef2f2',
-                color: '#991b1b',
-                fontWeight: 700,
-                gap: '4px',
-                padding: '4px 8px'
-              }}
-              title="Terminate session and return to official login page"
-            >
-              <LogOut size={12} />
-              <span>Sign Out</span>
-            </button>
+          {/* Sovereign Security & Compliance Badge */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '4px 10px',
+              background: '#f0fdf4',
+              border: '1px solid #bbf7d0',
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#166534',
+              borderRadius: '2px'
+            }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#16a34a' }} />
+            <span>256-Bit SSL Secured</span>
           </div>
         </div>
       </div>
