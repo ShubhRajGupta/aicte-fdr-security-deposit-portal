@@ -123,10 +123,10 @@ export const NocCertificate: React.FC<NocCertificateProps> = ({ nocCode }) => {
             <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#334155', letterSpacing: '0.08em' }}>
               भारत सरकार / GOVERNMENT OF INDIA
             </div>
-            <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#002147', letterSpacing: '0.03em', margin: '3px 0' }}>
+            <div style={{ fontSize: '1.35rem', fontWeight: 900, color: '#002147', fontFamily: 'var(--font-serif)', letterSpacing: '0.03em', margin: '3px 0' }}>
               ALL INDIA COUNCIL FOR TECHNICAL EDUCATION
             </div>
-            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#d97706' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#d97706', fontFamily: 'var(--font-devanagari)' }}>
               अखिल भारतीय तकनीकी शिक्षा परिषद (Regulation Bureau)
             </div>
             <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '3px' }}>
@@ -163,6 +163,7 @@ export const NocCertificate: React.FC<NocCertificateProps> = ({ nocCode }) => {
               fontSize: '1.15rem',
               fontWeight: 900,
               color: '#0f172a',
+              fontFamily: 'var(--font-serif)',
               textDecoration: 'underline',
               letterSpacing: '0.04em'
             }}

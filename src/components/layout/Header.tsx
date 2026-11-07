@@ -295,7 +295,7 @@ export const Header: React.FC = () => {
           'marquee',
           { scrollamount: '5', style: { flex: 1 } },
           <span>
-            <strong>APH 2024-27 Clause 1.4:</strong> All FDRs / JFDRs must be issued by a Scheduled Commercial Bank in joint name with "Member Secretary, AICTE New Delhi" with official lien endorsement. Instruments without bank confirmation remain at Trust Level L0. Encashment / NOC release requires Trust Level L2 verification.
+            <strong>APH 2024-27 Clause 1.4:</strong> All FDRs / JFDRs must be issued by a Scheduled Commercial Bank in joint name with "Member Secretary, AICTE New Delhi" with official lien endorsement. Instruments without bank confirmation remain at Trust Level L0. Encashment / NOC release requires Trust Level L2 verification. · <a href="https://aicte-qa.aicte-india.org/sites/default/files/APH%20Final.pdf" target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 700 }}>Download Official APH 2024-27 Handbook (PDF)</a>
           </span>
         )}
       </div>

@@ -8,7 +8,8 @@ import {
   CheckCircle2,
   FileCheck2,
   Lock,
-  Building
+  Building,
+  ExternalLink
 } from 'lucide-react';
 
 export const BankConfirmationPortal: React.FC = () => {
@@ -268,6 +269,68 @@ export const BankConfirmationPortal: React.FC = () => {
               </button>
             </form>
           </div>
+        </div>
+      </div>
+
+      {/* Official Scheduled Commercial Bank & RBI Regulatory Directory */}
+      <div
+        className="gov-panel"
+        style={{
+          marginTop: '1.25rem',
+          padding: '1rem 1.25rem',
+          background: '#ffffff',
+          borderLeft: '4px solid #1e40af'
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ fontSize: '12px', fontWeight: 800, color: '#002147', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Landmark size={14} style={{ color: '#1e40af' }} />
+            <span>RBI SCHEDULED COMMERCIAL BANK NETWORK &amp; STATUTORY REFERENCES</span>
+          </div>
+          <a
+            href="https://data.rbi.org.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: '11px', color: '#2563eb', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}
+          >
+            RBI Database on Indian Economy (DBIE) <ExternalLink size={11} />
+          </a>
+        </div>
+        <p style={{ fontSize: '11px', color: '#475569', marginBottom: '10px', lineHeight: 1.4 }}>
+          Statutory verification is conducted strictly with RBI Scheduled Commercial Banks as mandated by AICTE APH 2024-27 Clause 1.4. Reference the official banking directories below for branch IFSC clearing codes and CBS guidelines.
+        </p>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          {[
+            { name: 'State Bank of India', url: 'https://sbi.co.in/', logo: './assets/banks/sbi.svg' },
+            { name: 'Punjab National Bank', url: 'https://pnb.bank.in/', logo: './assets/banks/pnb.svg' },
+            { name: 'Bank of Baroda', url: 'https://bankofbaroda.bank.in/', logo: './assets/banks/bob.svg' },
+            { name: 'Canara Bank', url: 'https://canarabank.bank.in/', logo: './assets/banks/canara.svg' },
+            { name: 'Reserve Bank of India (RBI)', url: 'https://www.rbi.org.in/Scripts/Publications.aspx', logo: null }
+          ].map((bank) => (
+            <a
+              key={bank.name}
+              href={bank.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '4px 10px',
+                background: '#f8fafc',
+                border: '1px solid #cbd5e1',
+                borderRadius: '3px',
+                fontSize: '11px',
+                fontWeight: 600,
+                color: '#0f172a',
+                textDecoration: 'none'
+              }}
+            >
+              {bank.logo && <img src={bank.logo} alt={bank.name} style={{ height: '14px', width: 'auto' }} />}
+              <span>{bank.name}</span>
+              <ExternalLink size={10} style={{ color: '#64748b' }} />
+            </a>
+          ))}
         </div>
       </div>
     </div>

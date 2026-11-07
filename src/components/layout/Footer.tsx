@@ -19,8 +19,8 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="https://www.aicte-india.org/approval/approval-process-handbook" target="_blank" rel="noopener noreferrer">
-                Approval Process Handbook (APH 2024-27)
+              <a href="https://aicte-qa.aicte-india.org/sites/default/files/APH%20Final.pdf" target="_blank" rel="noopener noreferrer">
+                Approval Process Handbook (APH 2024-27 PDF) <ExternalLink size={10} />
               </a>
             </li>
             <li>
@@ -41,9 +41,9 @@ export const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Col 2: Government of India Links */}
+        {/* Col 2: Government of India & Design Systems */}
         <div className="gov-footer-col">
-          <h4>Government of India</h4>
+          <h4>Government of India & Standards</h4>
           <ul>
             <li>
               <a href="https://www.india.gov.in" target="_blank" rel="noopener noreferrer">
@@ -51,13 +51,18 @@ export const Footer: React.FC = () => {
               </a>
             </li>
             <li>
-              <a href="https://www.education.gov.in" target="_blank" rel="noopener noreferrer">
-                Ministry of Education (moe.gov.in)
+              <a href="https://www.ux4g.gov.in" target="_blank" rel="noopener noreferrer">
+                UX4G Unified Design System <ExternalLink size={10} />
               </a>
             </li>
             <li>
-              <a href="https://www.mygov.in" target="_blank" rel="noopener noreferrer">
-                MyGov - Citizen Engagement Platform
+              <a href="https://guidelines.india.gov.in" target="_blank" rel="noopener noreferrer">
+                GIGW 3.0 Web Guidelines <ExternalLink size={10} />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.nic.in" target="_blank" rel="noopener noreferrer">
+                National Informatics Centre (NIC) <ExternalLink size={10} />
               </a>
             </li>
             <li>
@@ -65,24 +70,35 @@ export const Footer: React.FC = () => {
                 Digital India National Initiative
               </a>
             </li>
-            <li>
-              <a href="https://scholarships.gov.in" target="_blank" rel="noopener noreferrer">
-                National Scholarship Portal (NSP)
-              </a>
-            </li>
           </ul>
         </div>
 
-        {/* Col 3: Statutory Policies & Guidelines */}
+        {/* Col 3: Banking & Regulatory Policies */}
         <div className="gov-footer-col">
-          <h4>Statutory Policies (GIGW)</h4>
+          <h4>Banking & Regulatory References</h4>
           <ul>
-            <li><a href="#">Website Policies & Guidelines</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Hyperlinking Policy</a></li>
-            <li><a href="#">Copyright Policy</a></li>
-            <li><a href="#">Disclaimer & Security Protocol</a></li>
+            <li>
+              <a href="https://data.rbi.org.in/" target="_blank" rel="noopener noreferrer">
+                RBI Database on Indian Economy (DBIE) <ExternalLink size={10} />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.rbi.org.in/Scripts/Publications.aspx" target="_blank" rel="noopener noreferrer">
+                RBI Banking Publications & Norms
+              </a>
+            </li>
+            <li>
+              <a href="https://sbi.co.in" target="_blank" rel="noopener noreferrer">
+                State Bank of India (sbi.co.in)
+              </a>
+            </li>
+            <li>
+              <a href="https://pnb.bank.in" target="_blank" rel="noopener noreferrer">
+                Punjab National Bank (pnb.bank.in)
+              </a>
+            </li>
+            <li><a href="#">Website Security &amp; Privacy Policy</a></li>
+            <li><a href="#">Hyperlinking &amp; Copyright Policy</a></li>
             <li><a href="#">GIGW 3.0 Compliance Statement</a></li>
           </ul>
         </div>

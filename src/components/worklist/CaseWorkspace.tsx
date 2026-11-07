@@ -279,6 +279,24 @@ export const CaseWorkspace: React.FC = () => {
                   transition: 'transform 0.1s ease'
                 }}
               >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '8px',
+                    left: '8px',
+                    background: 'rgba(0, 33, 71, 0.88)',
+                    color: '#ffffff',
+                    fontSize: '9px',
+                    fontWeight: 800,
+                    letterSpacing: '0.04em',
+                    padding: '2px 8px',
+                    borderRadius: '2px',
+                    zIndex: 10,
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  ILLUSTRATIVE DEMO SPECIMEN · APH 2024-27 CL. 1.4
+                </div>
                 <img
                   src={
                     instrument.instrumentType === 'BANK_GUARANTEE' || instrument.instrumentNumber.includes('BG')
